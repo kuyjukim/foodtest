@@ -6,6 +6,14 @@
 <title>냉장고 레시피</title>
 <meta name="description" content="집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아줍니다.">
 <link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#f6f6f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17171a" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="냉장고 레시피">
 </head>
 <body>
 <header class="topbar">
@@ -16,7 +24,10 @@
       <p>집에 있는 재료를 담으면 지금 만들 수 있는 요리를 찾아줍니다</p>
     </div>
   </div>
-  <button id="themeBtn" class="icon-btn" type="button" aria-label="밝은 화면과 어두운 화면 전환">🌙</button>
+  <div class="top-actions">
+    <button id="installBtn" class="install-btn" type="button" hidden>앱 설치</button>
+    <button id="themeBtn" class="icon-btn" type="button" aria-label="밝은 화면과 어두운 화면 전환">🌙</button>
+  </div>
 </header>
 
 <main class="layout">
@@ -75,7 +86,7 @@
         </label>
       </div>
       <div class="checks">
-        <label><input type="checkbox" id="readyOnly"> 바로 만들 수 있는 것만</label>
+        <label><input type="checkbox" id="makeableOnly"> 지금 만들 수 있는 것만 <span class="hint">(대체 포함)</span></label>
         <label><input type="checkbox" id="vegOnly"> 고기·해산물 없이</label>
       </div>
     </div>
@@ -91,6 +102,7 @@
   <div class="modal-box">
     <button class="modal-close" type="button" data-close aria-label="닫기">✕</button>
     <h2 id="modalTitle"></h2>
+    <div id="modalTabs" class="tabs" hidden></div>
     <div id="modalMeta" class="meta-row"></div>
     <div id="modalBody"></div>
   </div>

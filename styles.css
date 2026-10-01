@@ -11,6 +11,8 @@
   --ready-soft: #e4f3ea;
   --near: #b2791a;
   --near-soft: #fbf1dd;
+  --swap: #2f6ea8;
+  --swap-soft: #e3eef8;
   --far: #8b8b85;
   --radius: 12px;
   --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.05);
@@ -30,6 +32,8 @@
     --ready-soft: #1f3a2a;
     --near: #e0b55f;
     --near-soft: #3a2f18;
+    --swap: #78b6e8;
+    --swap-soft: #172c3d;
     --far: #7a7a74;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
   }
@@ -47,6 +51,8 @@
   --ready-soft: #1f3a2a;
   --near: #e0b55f;
   --near-soft: #3a2f18;
+  --swap: #78b6e8;
+  --swap-soft: #172c3d;
   --far: #7a7a74;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
 }
@@ -256,4 +262,54 @@ body {
 .tip {
   margin: 18px 0 0; padding: 11px 13px; border-radius: 10px; font-size: 13px;
   background: var(--accent-soft); color: var(--text); border-left: 3px solid var(--accent);
+}
+
+/* ── 대체 재료 · 버전 · 설치 ─────────────── */
+.top-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.install-btn {
+  border: 1px solid var(--accent); background: var(--accent); color: #fff;
+  padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+}
+.install-btn:hover { opacity: .9; }
+
+.badge.swap { background: var(--swap-soft); color: var(--swap); }
+.card.is-swap .bar > i { background: var(--swap); }
+.need.swapped { color: var(--text-dim); }
+.need.swapped b { color: var(--swap); font-weight: 600; }
+.meta-row .ver {
+  background: var(--accent-soft); color: var(--accent);
+  padding: 1px 7px; border-radius: 999px; font-weight: 600; font-size: 11px;
+}
+
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 14px; }
+.tab {
+  padding: 5px 11px; border-radius: 999px; font-size: 13px; cursor: pointer;
+  font-family: inherit; background: var(--surface-2); color: var(--text-dim);
+  border: 1px solid var(--line);
+}
+.tab:hover { color: var(--accent); border-color: var(--accent); }
+.tab.tab-ready { color: var(--ready); border-color: var(--ready-soft); }
+.tab.tab-swap { color: var(--swap); border-color: var(--swap-soft); }
+.tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.ing-list li.swap { background: var(--swap-soft); color: var(--swap); font-weight: 600; }
+
+.swap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.swap-list li {
+  font-size: 13px; padding: 9px 11px; border-radius: 9px;
+  background: var(--surface-2); display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
+}
+.swap-list li > b { color: var(--text); margin-right: 2px; }
+.swap-list .opt {
+  padding: 2px 8px; border-radius: 999px; font-size: 12px;
+  background: var(--surface); color: var(--text-dim); border: 1px solid var(--line);
+}
+.swap-list .opt.have { background: var(--ready-soft); color: var(--ready); border-color: transparent; font-weight: 600; }
+.swap-list .note { flex-basis: 100%; font-size: 12px; color: var(--text-dim); }
+
+@media (max-width: 520px) {
+  .topbar h1 { font-size: 18px; }
+  .topbar p { display: none; }
+  .cards { grid-template-columns: 1fr; }
 }

@@ -6,10 +6,10 @@
  */
 window.RECIPES = [
   {
-    id: 'kimchi-jjigae', name: '김치찌개', category: '한식', kind: '국·찌개',
+    id: 'kimchi-jjigae', family: '김치찌개', label: '돼지고기', name: '돼지고기 김치찌개', category: '한식', kind: '국·찌개',
     time: 25, difficulty: '쉬움', servings: 2, veg: false,
-    essential: ['김치', '고춧가루'],
-    optional: ['돼지고기', '두부', '양파', '대파', '참치캔', '다진마늘', '설탕', '간장'],
+    essential: ['김치', '돼지고기', '고춧가루'],
+    optional: ['두부', '양파', '대파', '다진마늘', '설탕', '간장'],
     steps: [
       '김치 300g을 한입 크기로 썰고, 돼지고기는 먹기 좋게 썬다.',
       '냄비에 식용유를 두르고 김치와 돼지고기를 5분간 볶아 신맛을 날린다.',
@@ -20,7 +20,7 @@ window.RECIPES = [
     tip: '묵은지일수록 국물이 깊어집니다. 신맛이 너무 강하면 설탕 대신 양파를 넉넉히 넣어 보세요.'
   },
   {
-    id: 'doenjang-jjigae', name: '된장찌개', category: '한식', kind: '국·찌개',
+    id: 'doenjang-jjigae', family: '된장찌개', label: '채소', name: '채소 된장찌개', category: '한식', kind: '국·찌개',
     time: 20, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['된장'],
     optional: ['두부', '애호박', '양파', '감자', '대파', '청양고추', '버섯', '다진마늘', '고춧가루'],
@@ -34,7 +34,7 @@ window.RECIPES = [
     tip: '된장은 처음부터 오래 끓이면 구수한 향이 날아갑니다. 재료를 익히는 동안만 끓이세요.'
   },
   {
-    id: 'sundubu-jjigae', name: '순두부찌개', category: '한식', kind: '국·찌개',
+    id: 'sundubu-jjigae', family: '순두부찌개', label: '기본', name: '순두부찌개', category: '한식', kind: '국·찌개',
     time: 20, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['순두부', '고춧가루'],
     optional: ['돼지고기', '김치', '양파', '대파', '계란', '다진마늘', '간장', '참기름', '애호박'],
@@ -132,7 +132,7 @@ window.RECIPES = [
     tip: '감자는 큼직하게 썰어야 조리는 동안 부서지지 않습니다.'
   },
   {
-    id: 'jeyuk-bokkeum', name: '제육볶음', category: '한식', kind: '볶음·구이',
+    id: 'jeyuk-bokkeum', family: '제육볶음', label: '고추장', name: '제육볶음', category: '한식', kind: '볶음·구이',
     time: 25, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['돼지고기', '고추장', '고춧가루'],
     optional: ['양파', '대파', '당근', '양배추', '청양고추', '간장', '설탕', '다진마늘', '참기름', '후추', '물엿'],
@@ -202,7 +202,7 @@ window.RECIPES = [
     tip: '계란물을 체에 거르면 단면이 매끈해집니다. 불은 처음부터 끝까지 약불.'
   },
   {
-    id: 'gyeran-jjim', name: '계란찜', category: '한식', kind: '반찬',
+    id: 'gyeran-jjim', family: '계란찜', label: '뚝배기', name: '뚝배기 계란찜', category: '한식', kind: '반찬',
     time: 15, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['계란'],
     optional: ['대파', '당근', '새우젓', '참기름', '깨', '소금'],
@@ -328,7 +328,7 @@ window.RECIPES = [
     tip: '케찹은 불을 약하게 줄이고 넣어야 타지 않고 새콤함이 남습니다.'
   },
   {
-    id: 'kimchi-bokkeumbap', name: '김치볶음밥', category: '한식', kind: '밥·면',
+    id: 'kimchi-bokkeumbap', family: '볶음밥', label: '김치', name: '김치볶음밥', category: '한식', kind: '밥·면',
     time: 15, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['밥', '김치'],
     optional: ['계란', '스팸', '돼지고기', '대파', '참치캔', '김', '고춧가루', '설탕', '간장', '참기름', '치즈'],
@@ -342,7 +342,7 @@ window.RECIPES = [
     tip: '밥은 찬밥이 좋습니다. 갓 지은 밥이면 뚜껑 열고 한 김 식혀서 쓰세요.'
   },
   {
-    id: 'gyeran-bokkeumbap', name: '계란볶음밥', category: '한식', kind: '밥·면',
+    id: 'gyeran-bokkeumbap', family: '볶음밥', label: '계란', name: '계란볶음밥', category: '한식', kind: '밥·면',
     time: 12, difficulty: '쉬움', servings: 1, veg: true,
     essential: ['밥', '계란'],
     optional: ['대파', '당근', '양파', '간장', '참기름', '후추', '깨', '굴소스'],
@@ -384,7 +384,7 @@ window.RECIPES = [
     tip: '냉장고에 남은 나물·채소 무엇이든 올려도 됩니다. 색이 다른 재료 3가지만 맞추면 그럴듯해집니다.'
   },
   {
-    id: 'chamchi-mayo-bap', name: '참치마요 덮밥', category: '한식', kind: '밥·면',
+    id: 'chamchi-mayo-bap', family: '덮밥', label: '참치마요', name: '참치마요 덮밥', category: '한식', kind: '밥·면',
     time: 10, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['밥', '참치캔', '마요네즈'],
     optional: ['계란', '양파', '간장', '설탕', '김', '깨', '대파', '스리라차'],
@@ -454,7 +454,7 @@ window.RECIPES = [
     tip: '두부를 소금물에 데치면 부서지지 않고 간도 배입니다. 섞을 때는 주걱으로 밀듯이.'
   },
   {
-    id: 'tteokbokki', name: '떡볶이', category: '분식', kind: '간식·분식',
+    id: 'tteokbokki', family: '떡볶이', label: '고추장', name: '고추장 떡볶이', category: '분식', kind: '간식·분식',
     time: 20, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['떡', '고추장', '고춧가루'],
     optional: ['어묵', '대파', '양배추', '계란', '설탕', '간장', '다진마늘', '물엿', '라면사리', '치즈'],
@@ -468,10 +468,10 @@ window.RECIPES = [
     tip: '설탕을 먼저 충분히 넣고 마지막에 물엿으로 윤기를 내면 분식집 맛에 가까워집니다.'
   },
   {
-    id: 'rabokki-ramyeon', name: '콩나물 라면', category: '분식', kind: '간식·분식',
+    id: 'rabokki-ramyeon', family: '라면', label: '콩나물', name: '콩나물 라면', category: '분식', kind: '간식·분식',
     time: 10, difficulty: '쉬움', servings: 1, veg: false,
-    essential: ['라면'],
-    optional: ['콩나물', '계란', '대파', '김치', '치즈', '만두'],
+    essential: ['라면', '콩나물'],
+    optional: ['계란', '대파', '김치', '치즈', '만두'],
     steps: [
       '냄비에 물 500ml를 끓인다.',
       '물이 끓으면 스프와 면을 넣는다.',
@@ -482,7 +482,7 @@ window.RECIPES = [
     tip: '콩나물은 끝에 넣어야 아삭합니다. 면을 꼬들하게 하려면 면 넣고 3분을 넘기지 마세요.'
   },
   {
-    id: 'janchi-guksu', name: '잔치국수', category: '한식', kind: '밥·면',
+    id: 'janchi-guksu', family: '국수', label: '잔치', name: '잔치국수', category: '한식', kind: '밥·면',
     time: 25, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['소면'],
     optional: ['계란', '애호박', '당근', '김', '대파', '멸치', '다시마', '간장', '고춧가루', '참기름'],
@@ -496,7 +496,7 @@ window.RECIPES = [
     tip: '삶은 소면은 찬물에 손으로 비벼 헹궈야 전분이 빠져 쫄깃합니다.'
   },
   {
-    id: 'bibim-guksu', name: '비빔국수', category: '한식', kind: '밥·면',
+    id: 'bibim-guksu', family: '국수', label: '비빔', name: '비빔국수', category: '한식', kind: '밥·면',
     time: 15, difficulty: '쉬움', servings: 1, veg: true,
     essential: ['소면', '고추장', '식초'],
     optional: ['김치', '오이', '상추', '계란', '설탕', '간장', '다진마늘', '참기름', '깨', '고춧가루'],
@@ -510,7 +510,7 @@ window.RECIPES = [
     tip: '양념장을 미리 만들어 10분 두면 설탕이 녹아 맛이 어우러집니다.'
   },
   {
-    id: 'tomato-pasta', name: '토마토 파스타', category: '양식', kind: '밥·면',
+    id: 'tomato-pasta', family: '파스타', label: '토마토', name: '토마토 파스타', category: '양식', kind: '밥·면',
     time: 25, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['스파게티면', '토마토소스'],
     optional: ['양파', '마늘', '베이컨', '버섯', '올리브오일', '파마산치즈', '바질', '설탕', '후추', '방울토마토'],
@@ -524,7 +524,7 @@ window.RECIPES = [
     tip: '면수는 버리지 마세요. 소스와 면이 붙게 해주는 핵심입니다.'
   },
   {
-    id: 'aglio-olio', name: '알리오 올리오', category: '양식', kind: '밥·면',
+    id: 'aglio-olio', family: '파스타', label: '알리오올리오', name: '알리오 올리오', category: '양식', kind: '밥·면',
     time: 20, difficulty: '쉬움', servings: 1, veg: true,
     essential: ['스파게티면', '마늘', '올리브오일'],
     optional: ['페페론치노', '파슬리', '파마산치즈', '후추', '베이컨', '새우'],
@@ -538,7 +538,7 @@ window.RECIPES = [
     tip: '마늘은 반드시 찬 팬에서 약불로 시작해야 타지 않고 향만 올라옵니다.'
   },
   {
-    id: 'cream-pasta', name: '크림 파스타', category: '양식', kind: '밥·면',
+    id: 'cream-pasta', family: '파스타', label: '크림', name: '크림 파스타', category: '양식', kind: '밥·면',
     time: 25, difficulty: '보통', servings: 2, veg: true,
     essential: ['스파게티면', '우유'],
     optional: ['생크림', '베이컨', '양파', '마늘', '버터', '버섯', '파마산치즈', '후추', '감자전분'],
@@ -552,7 +552,7 @@ window.RECIPES = [
     tip: '우유만 쓸 때는 센불에서 끓이면 분리됩니다. 끝까지 약불로 졸이세요.'
   },
   {
-    id: 'gamjajeon', name: '감자전', category: '한식', kind: '간식·분식',
+    id: 'gamjajeon', family: '전', label: '감자', name: '감자전', category: '한식', kind: '간식·분식',
     time: 25, difficulty: '보통', servings: 2, veg: true,
     essential: ['감자'],
     optional: ['양파', '부추', '청양고추', '감자전분', '소금', '간장', '식초'],
@@ -566,7 +566,7 @@ window.RECIPES = [
     tip: '가라앉은 전분을 다시 넣는 게 바삭함의 비결입니다. 밀가루는 넣지 않아도 됩니다.'
   },
   {
-    id: 'kimchijeon', name: '김치전', category: '한식', kind: '간식·분식',
+    id: 'kimchijeon', family: '전', label: '김치', name: '김치전', category: '한식', kind: '간식·분식',
     time: 20, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['김치', '밀가루'],
     optional: ['감자전분', '양파', '대파', '청양고추', '오징어', '설탕', '간장'],
@@ -580,7 +580,7 @@ window.RECIPES = [
     tip: '반죽에 찬물을 쓰고 기름을 아끼지 않으면 훨씬 바삭합니다.'
   },
   {
-    id: 'buchujeon', name: '부추전', category: '한식', kind: '간식·분식',
+    id: 'buchujeon', family: '전', label: '부추', name: '부추전', category: '한식', kind: '간식·분식',
     time: 20, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['부추', '밀가루'],
     optional: ['감자전분', '양파', '당근', '청양고추', '오징어', '새우', '간장', '식초'],
@@ -594,7 +594,7 @@ window.RECIPES = [
     tip: '간장 1큰술 + 식초 1작은술 + 고춧가루 약간이면 초간장 완성입니다.'
   },
   {
-    id: 'aehobakjeon', name: '애호박전', category: '한식', kind: '반찬',
+    id: 'aehobakjeon', family: '전', label: '애호박', name: '애호박전', category: '한식', kind: '반찬',
     time: 15, difficulty: '쉬움', servings: 2, veg: true,
     essential: ['애호박', '계란', '밀가루'],
     optional: ['소금', '후추', '간장', '식초'],
@@ -608,7 +608,7 @@ window.RECIPES = [
     tip: '밀가루를 두껍게 묻히면 계란옷이 벗겨집니다. 얇게, 반드시 털어내세요.'
   },
   {
-    id: 'kimchi-cheese-toast', name: '김치 치즈 토스트', category: '양식', kind: '간식·분식',
+    id: 'kimchi-cheese-toast', family: '토스트·샌드위치', label: '김치치즈', name: '김치 치즈 토스트', category: '양식', kind: '간식·분식',
     time: 12, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['식빵', '김치', '치즈'],
     optional: ['버터', '계란', '마요네즈', '설탕', '햄', '케찹'],
@@ -622,7 +622,7 @@ window.RECIPES = [
     tip: '김치의 물기를 꼭 짜야 빵이 축축해지지 않습니다.'
   },
   {
-    id: 'french-toast', name: '프렌치토스트', category: '양식', kind: '간식·분식',
+    id: 'french-toast', family: '토스트·샌드위치', label: '프렌치', name: '프렌치토스트', category: '양식', kind: '간식·분식',
     time: 12, difficulty: '쉬움', servings: 1, veg: true,
     essential: ['식빵', '계란', '우유'],
     optional: ['버터', '설탕', '시나몬가루', '꿀', '잼', '바나나', '소금'],
@@ -636,7 +636,7 @@ window.RECIPES = [
     tip: '약불로 천천히 구워야 속까지 익고 겉이 타지 않습니다.'
   },
   {
-    id: 'gyeran-sandwich', name: '계란 샌드위치', category: '양식', kind: '간식·분식',
+    id: 'gyeran-sandwich', family: '토스트·샌드위치', label: '계란샌드위치', name: '계란 샌드위치', category: '양식', kind: '간식·분식',
     time: 20, difficulty: '쉬움', servings: 1, veg: true,
     essential: ['식빵', '계란', '마요네즈'],
     optional: ['양파', '오이', '설탕', '후추', '버터', '머스타드', '양상추', '치즈'],
@@ -690,5 +690,355 @@ window.RECIPES = [
       '채소에 닭고기를 올리고 드레싱을 뿌린다.'
     ],
     tip: '구운 고기를 바로 썰면 육즙이 빠집니다. 5분만 기다리세요.'
+  },
+  {
+    id: 'kimchi-jjigae-tuna', family: '김치찌개', label: '참치', name: '참치 김치찌개', category: '한식', kind: '국·찌개',
+    time: 20, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['김치', '참치캔', '고춧가루'],
+    optional: ['두부', '양파', '대파', '청양고추', '다진마늘', '설탕', '간장'],
+    steps: [
+      '김치 300g을 한입 크기로 썬다. 참치캔은 기름을 반만 따라낸다.',
+      '냄비에 김치와 참치 기름 1큰술을 넣고 5분간 볶는다.',
+      '물 400ml, 고춧가루 1큰술, 다진마늘 1작은술, 설탕 1/2작은술을 넣고 센불에 끓인다.',
+      '끓어오르면 중불로 10분 끓인 뒤 두부와 양파를 넣는다.',
+      '참치 살을 마지막에 넣고 3분만 더 끓인 뒤 대파를 올린다.'
+    ],
+    tip: '참치는 끝에 넣어야 살이 부서지지 않습니다. 기름을 다 버리면 고소함이 사라지니 반만 따라내세요.'
+  },
+  {
+    id: 'kimchi-jjigae-spam', family: '김치찌개', label: '스팸', name: '스팸 김치찌개', category: '한식', kind: '국·찌개',
+    time: 25, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['김치', '스팸', '고춧가루'],
+    optional: ['두부', '양파', '대파', '계란', '다진마늘', '설탕', '청양고추'],
+    steps: [
+      '스팸을 1cm 두께로 썰어 기름 없는 팬에 양면을 노릇하게 굽는다.',
+      '같은 냄비에 김치 300g을 넣고 스팸 기름으로 5분간 볶는다.',
+      '물 400ml, 고춧가루 1큰술, 다진마늘 1작은술을 넣고 10분 끓인다.',
+      '구운 스팸과 두부, 양파를 넣고 5분 더 끓인다.',
+      '대파를 넣고 간을 본다. 스팸이 짜니 소금은 맨 마지막에.'
+    ],
+    tip: '스팸을 한 번 구워서 넣으면 기름이 빠지고 국물이 느끼하지 않습니다.'
+  },
+  {
+    id: 'kimchi-jjigae-kkongchi', family: '김치찌개', label: '꽁치', name: '꽁치 김치찌개', category: '한식', kind: '국·찌개',
+    time: 25, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['김치', '꽁치통조림', '고춧가루'],
+    optional: ['양파', '대파', '청양고추', '다진마늘', '생강', '설탕', '두부'],
+    steps: [
+      '김치 300g을 썰어 냄비에 넣고 식용유 1큰술과 함께 5분 볶는다.',
+      '물 500ml와 꽁치통조림 국물을 함께 붓는다.',
+      '고춧가루 1큰술, 다진마늘 1큰술, 생강 약간을 넣고 10분 끓인다.',
+      '꽁치를 통째로 올리고 양파를 넣어 7분 더 끓인다.',
+      '청양고추와 대파를 넣고 1분 후 불을 끈다.'
+    ],
+    tip: '꽁치는 이미 푹 익어 있으니 젓지 말고 그대로 두세요. 생강 약간이 비린내를 잡아 줍니다.'
+  },
+  {
+    id: 'kimchi-jjigae-deulgireum', family: '김치찌개', label: '들기름·고기없이', name: '들기름 묵은지찌개', category: '한식', kind: '국·찌개',
+    time: 25, difficulty: '쉬움', servings: 2, veg: true,
+    essential: ['김치', '들기름'],
+    optional: ['두부', '양파', '대파', '다시마', '설탕', '다진마늘', '고춧가루'],
+    steps: [
+      '묵은지 300g을 씻지 말고 그대로 한입 크기로 썬다.',
+      '냄비에 들기름 2큰술을 두르고 김치를 중불에서 7분간 충분히 볶는다.',
+      '물 450ml와 다시마 한 조각을 넣고 끓인다. (끓으면 다시마는 건진다)',
+      '설탕 1작은술을 넣고 중약불에서 12분 끓인다.',
+      '두부와 대파를 넣고 3분 더 끓인 뒤 들기름 1작은술을 더 둘러 마무리한다.'
+    ],
+    tip: '고기 없이도 들기름을 넉넉히 쓰면 국물이 깊어집니다. 오래 볶을수록 맛있어요.'
+  },
+  {
+    id: 'doenjang-jjigae-beef', family: '된장찌개', label: '차돌', name: '차돌 된장찌개', category: '한식', kind: '국·찌개',
+    time: 25, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['된장', '소고기'],
+    optional: ['두부', '애호박', '양파', '버섯', '대파', '청양고추', '다진마늘', '고춧가루'],
+    steps: [
+      '달군 냄비에 차돌박이 150g을 기름 없이 넣고 2분간 볶는다.',
+      '고기 기름이 나오면 양파와 애호박을 넣어 2분 더 볶는다.',
+      '물 500ml를 붓고 된장 1.5큰술을 체에 풀어 넣는다.',
+      '끓어오르면 거품을 걷어내고 버섯과 두부를 넣어 5분 끓인다.',
+      '다진마늘 1작은술, 대파, 청양고추를 넣고 1분 더 끓인다.'
+    ],
+    tip: '차돌박이를 먼저 볶아 기름을 내면 육수를 따로 내지 않아도 됩니다.'
+  },
+  {
+    id: 'doenjang-jjigae-clam', family: '된장찌개', label: '바지락', name: '바지락 된장찌개', category: '한식', kind: '국·찌개',
+    time: 25, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['된장', '바지락'],
+    optional: ['두부', '애호박', '양파', '대파', '청양고추', '다진마늘', '고춧가루'],
+    steps: [
+      '바지락 300g을 소금물에 30분 담가 해감하고 바락바락 씻는다.',
+      '냄비에 물 500ml와 바지락을 넣고 끓인다.',
+      '조개가 입을 벌리면 된장 1.5큰술을 체에 풀어 넣는다.',
+      '애호박, 양파, 두부를 넣고 5분 끓인다.',
+      '다진마늘 1작은술과 대파를 넣고 1분 더 끓인다. 조개 간이 있으니 소금은 맨 나중에.'
+    ],
+    tip: '조개를 오래 끓이면 질겨집니다. 입을 벌리는 순간부터는 5분 안에 끝내세요.'
+  },
+  {
+    id: 'sundubu-seafood', family: '순두부찌개', label: '해물', name: '해물 순두부찌개', category: '한식', kind: '국·찌개',
+    time: 20, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['순두부', '새우', '고춧가루'],
+    optional: ['바지락', '오징어', '계란', '양파', '대파', '다진마늘', '간장', '애호박'],
+    steps: [
+      '냄비에 식용유 1큰술과 고춧가루 1.5큰술을 넣고 약불에서 30초 볶아 고추기름을 낸다.',
+      '양파와 다진마늘을 넣고 1분 볶는다.',
+      '물 300ml를 붓고 끓으면 새우와 바지락, 오징어를 넣는다.',
+      '조개가 입을 벌리면 순두부를 큼직하게 떠 넣고 5분 끓인다.',
+      '간장 1큰술로 간하고 불을 끈 뒤 계란을 깨 넣고 대파를 올린다.'
+    ],
+    tip: '해물에서 간이 나오니 간장은 맛을 본 뒤 조금씩 넣으세요.'
+  },
+  {
+    id: 'bokkeumbap-shrimp', family: '볶음밥', label: '새우', name: '새우볶음밥', category: '중식', kind: '밥·면',
+    time: 15, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['밥', '새우', '계란'],
+    optional: ['대파', '당근', '양파', '굴소스', '간장', '참기름', '후추', '완두콩'],
+    steps: [
+      '새우는 물기를 닦고 소금·후추를 뿌려 둔다.',
+      '팬에 기름을 두르고 대파를 볶아 파기름을 낸 뒤 새우를 1분 볶아 꺼낸다.',
+      '같은 팬에 계란물을 부어 반쯤 익히고 밥 1공기를 넣어 눌러가며 볶는다.',
+      '굴소스 1작은술과 간장 1작은술을 팬 가장자리에 둘러 넣는다.',
+      '새우를 다시 넣고 30초 볶은 뒤 참기름과 후추로 마무리한다.'
+    ],
+    tip: '새우를 먼저 꺼냈다가 마지막에 합치면 탱탱한 식감이 살아 있습니다.'
+  },
+  {
+    id: 'bokkeumbap-spam', family: '볶음밥', label: '스팸', name: '스팸볶음밥', category: '한식', kind: '밥·면',
+    time: 15, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['밥', '스팸'],
+    optional: ['계란', '대파', '당근', '양파', '김', '간장', '참기름', '후추', '치즈'],
+    steps: [
+      '스팸을 작게 깍둑썰기 해 기름 없는 팬에 3분 볶아 기름을 뺀다.',
+      '대파와 당근을 넣고 2분 더 볶는다.',
+      '밥 1공기를 넣고 주걱으로 눌러가며 3분 볶는다.',
+      '간장 1작은술을 팬 가장자리에 둘러 넣고 섞는다.',
+      '참기름과 후추를 넣고 계란프라이와 김가루를 올린다.'
+    ],
+    tip: '스팸 자체가 짜니 간장은 아주 조금만. 소금은 넣지 않아도 됩니다.'
+  },
+  {
+    id: 'bokkeumbap-garlic', family: '볶음밥', label: '베이컨마늘', name: '베이컨 마늘볶음밥', category: '양식', kind: '밥·면',
+    time: 15, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['밥', '베이컨', '마늘'],
+    optional: ['버터', '간장', '후추', '파슬리', '계란', '양파', '파마산치즈'],
+    steps: [
+      '마늘 5쪽을 편으로 썰고 베이컨은 1cm 폭으로 썬다.',
+      '차가운 팬에 기름과 마늘을 넣고 약불에서 노릇해질 때까지 천천히 익힌다.',
+      '베이컨을 넣고 바삭해질 때까지 3분 볶는다.',
+      '버터 1큰술과 밥 1공기를 넣고 센불에서 3분 볶는다.',
+      '간장 1작은술을 둘러 넣고 후추와 파슬리로 마무리한다.'
+    ],
+    tip: '마늘은 반드시 찬 팬에서 약불로 시작해야 타지 않고 향만 올라옵니다.'
+  },
+  {
+    id: 'rose-pasta', family: '파스타', label: '로제', name: '로제 파스타', category: '양식', kind: '밥·면',
+    time: 25, difficulty: '보통', servings: 2, veg: true,
+    essential: ['스파게티면', '토마토소스', '우유'],
+    optional: ['생크림', '베이컨', '양파', '마늘', '버터', '파마산치즈', '고춧가루', '설탕', '후추'],
+    steps: [
+      '면을 소금물에 표시보다 1분 짧게 삶고 면수 1컵을 남긴다.',
+      '팬에 버터를 녹이고 마늘·양파를 2분, 베이컨을 3분 볶는다.',
+      '토마토소스 200ml를 넣고 3분 끓인다.',
+      '우유 150ml(생크림이 있으면 반반)를 넣고 약불에서 5분 졸인다. 고춧가루 1작은술을 넣으면 매콤해진다.',
+      '면과 면수를 넣어 농도를 맞추고 파마산치즈와 후추로 마무리한다.'
+    ],
+    tip: '토마토소스를 먼저 끓인 뒤 유제품을 넣어야 분리되지 않습니다.'
+  },
+  {
+    id: 'ganjang-butter-pasta', family: '파스타', label: '간장버터', name: '간장버터 파스타', category: '양식', kind: '밥·면',
+    time: 15, difficulty: '쉬움', servings: 1, veg: true,
+    essential: ['스파게티면', '간장', '버터'],
+    optional: ['마늘', '대파', '베이컨', '계란', '김', '후추', '설탕', '참기름'],
+    steps: [
+      '면을 소금물에 표시대로 삶고 면수 1컵을 남긴다.',
+      '팬에 버터 1.5큰술을 녹이고 편마늘과 대파를 약불에서 2분 볶는다.',
+      '간장 1.5큰술과 설탕 1/2작은술을 넣어 30초만 끓인다.',
+      '면과 면수 1/3컵을 넣고 센불에서 1분간 버무린다.',
+      '후추를 넉넉히 뿌리고 김가루와 노른자를 올린다.'
+    ],
+    tip: '간장은 오래 끓이면 짜집니다. 넣고 30초 안에 면을 합치세요.'
+  },
+  {
+    id: 'tteokbokki-gungjung', family: '떡볶이', label: '궁중(간장)', name: '궁중떡볶이', category: '한식', kind: '간식·분식',
+    time: 25, difficulty: '쉬움', servings: 2, veg: true,
+    essential: ['떡', '간장', '설탕'],
+    optional: ['소고기', '당근', '양파', '버섯', '피망', '대파', '다진마늘', '참기름', '깨', '후추'],
+    steps: [
+      '떡 300g을 따뜻한 물에 10분 불려 간장 1큰술과 참기름 1작은술에 미리 버무린다.',
+      '간장 3큰술, 설탕 1.5큰술, 다진마늘 1작은술, 참기름 1큰술, 후추를 섞어 양념을 만든다.',
+      '팬에 기름을 두르고 소고기를 볶다가 당근·양파·버섯을 넣어 3분 볶는다.',
+      '떡과 양념, 물 100ml를 넣고 중불에서 5분 조린다.',
+      '피망과 대파를 넣고 1분 더 볶은 뒤 깨를 뿌린다.'
+    ],
+    tip: '맵지 않아 아이들도 먹습니다. 떡을 미리 간장에 버무려 두면 속까지 간이 뱁니다.'
+  },
+  {
+    id: 'tteokbokki-rose', family: '떡볶이', label: '로제', name: '로제떡볶이', category: '분식', kind: '간식·분식',
+    time: 20, difficulty: '쉬움', servings: 2, veg: true,
+    essential: ['떡', '고추장', '우유'],
+    optional: ['생크림', '어묵', '소시지', '베이컨', '양파', '대파', '치즈', '설탕', '고춧가루', '다진마늘'],
+    steps: [
+      '떡 300g을 따뜻한 물에 10분 불린다.',
+      '팬에 베이컨이나 소시지와 양파를 넣고 2분 볶는다.',
+      '물 200ml, 고추장 1.5큰술, 고춧가루 1큰술, 설탕 1.5큰술을 넣고 끓인다.',
+      '떡과 어묵을 넣고 5분 끓여 국물이 조금 줄면 우유 200ml를 붓는다.',
+      '약불에서 5분 더 졸이고 치즈를 올려 녹인다.'
+    ],
+    tip: '우유는 처음부터 넣지 말고 양념이 끓은 뒤에 넣어야 분리되지 않습니다.'
+  },
+  {
+    id: 'tteokbokki-jajang', family: '떡볶이', label: '짜장', name: '짜장떡볶이', category: '분식', kind: '간식·분식',
+    time: 20, difficulty: '쉬움', servings: 2, veg: true,
+    essential: ['떡', '춘장'],
+    optional: ['양파', '양배추', '어묵', '대파', '돼지고기', '설탕', '감자전분', '계란', '오이'],
+    steps: [
+      '팬에 식용유 3큰술과 춘장 2큰술을 넣고 약불에서 2분 볶아 춘장을 튀긴다.',
+      '양파와 양배추를 넣고 3분 볶는다.',
+      '물 300ml와 설탕 1.5큰술을 넣고 끓인다.',
+      '불린 떡과 어묵을 넣어 중불에서 8분 조린다.',
+      '전분물 1큰술을 둘러 농도를 맞추고 대파를 넣는다.'
+    ],
+    tip: '춘장을 기름에 먼저 볶는 과정을 빼면 쓴맛이 남습니다.'
+  },
+  {
+    id: 'ramyeon-kimchi', family: '라면', label: '김치', name: '김치 라면', category: '분식', kind: '간식·분식',
+    time: 10, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['라면', '김치'],
+    optional: ['계란', '대파', '치즈', '스팸', '두부', '콩나물'],
+    steps: [
+      '냄비에 식용유 1작은술을 두르고 김치 100g을 2분 볶는다.',
+      '물 500ml를 붓고 끓인다.',
+      '끓으면 스프는 2/3만 넣고 면을 넣는다. (김치에 간이 있다)',
+      '3분 끓이다가 대파를 넣고 계란을 깨 넣는다.',
+      '30초 후 불을 끈다.'
+    ],
+    tip: '김치를 먼저 볶으면 국물이 훨씬 깊어집니다. 스프는 꼭 줄여서 넣으세요.'
+  },
+  {
+    id: 'ramyeon-cheese', family: '라면', label: '치즈', name: '치즈 라면', category: '분식', kind: '간식·분식',
+    time: 8, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['라면', '치즈'],
+    optional: ['계란', '대파', '우유', '후추', '김치'],
+    steps: [
+      '물 450ml를 끓인다. (국물을 진하게 하려고 평소보다 적게)',
+      '스프와 면을 넣고 3분 끓인다.',
+      '우유 50ml를 넣으면 더 부드러워진다.',
+      '불을 끄고 치즈 1~2장을 올려 뚜껑을 덮는다.',
+      '1분 두었다가 섞어 먹는다. 후추를 뿌린다.'
+    ],
+    tip: '치즈는 불을 끄고 올려야 눌어붙지 않고 고르게 녹습니다.'
+  },
+  {
+    id: 'ramyeon-tteok', family: '라면', label: '떡·만두', name: '떡만두 라면', category: '분식', kind: '간식·분식',
+    time: 12, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['라면', '떡'],
+    optional: ['만두', '계란', '대파', '김', '치즈', '콩나물'],
+    steps: [
+      '물 600ml를 끓이고 떡과 냉동만두를 먼저 넣어 3분 끓인다.',
+      '스프를 넣고 1분 더 끓인다.',
+      '면을 넣고 3분 끓인다.',
+      '대파를 넣고 계란을 깨 넣는다.',
+      '30초 후 불을 끄고 김가루를 올린다.'
+    ],
+    tip: '떡과 만두가 국물을 먹으니 물을 평소보다 100ml 더 잡으세요.'
+  },
+  {
+    id: 'haemul-pajeon', family: '전', label: '해물파전', name: '해물파전', category: '한식', kind: '간식·분식',
+    time: 25, difficulty: '보통', servings: 2, veg: false,
+    essential: ['대파', '밀가루', '오징어'],
+    optional: ['새우', '계란', '감자전분', '청양고추', '간장', '식초', '부추'],
+    steps: [
+      '쪽파나 대파를 10cm 길이로 썰고, 오징어와 새우는 잘게 썬다.',
+      '밀가루 1컵, 감자전분 3큰술, 찬물 1컵, 소금 1/2작은술을 섞어 반죽을 만든다.',
+      '기름을 넉넉히 두른 팬에 파를 가지런히 깔고 반죽을 얇게 붓는다.',
+      '해물을 고루 올리고 중강불에서 4분 굽는다.',
+      '풀어둔 계란을 위에 붓고 뒤집어 3분 더 구워 바삭하게 낸다.'
+    ],
+    tip: '파를 먼저 깔고 반죽을 붓는 순서가 중요합니다. 반죽에 섞으면 파가 뭉칩니다.'
+  },
+  {
+    id: 'ganjang-guksu', family: '국수', label: '간장비빔', name: '간장비빔국수', category: '한식', kind: '밥·면',
+    time: 12, difficulty: '쉬움', servings: 1, veg: true,
+    essential: ['소면', '간장'],
+    optional: ['계란', '김', '대파', '참기름', '설탕', '깨', '고춧가루', '오이', '버터'],
+    steps: [
+      '간장 2큰술, 참기름 1큰술, 설탕 1작은술, 다진 대파 1큰술, 깨를 섞어 양념장을 만든다.',
+      '끓는 물에 소면을 3분 삶는다.',
+      '찬물에 손으로 비벼 헹구고 물기를 꽉 뺀다.',
+      '면에 양념장을 넣고 비빈다.',
+      '김가루와 반숙 계란을 올린다.'
+    ],
+    tip: '비빔장에 버터 한 조각을 넣으면 간장버터 국수가 됩니다. 5분이면 끝나는 야식용입니다.'
+  },
+  {
+    id: 'street-toast', family: '토스트·샌드위치', label: '길거리', name: '길거리 토스트', category: '양식', kind: '간식·분식',
+    time: 15, difficulty: '쉬움', servings: 1, veg: true,
+    essential: ['식빵', '계란', '양배추'],
+    optional: ['당근', '대파', '햄', '치즈', '버터', '설탕', '케찹', '마요네즈', '후추'],
+    steps: [
+      '양배추와 당근을 아주 가늘게 채 썬다.',
+      '계란 2개를 풀고 채소와 소금·후추를 섞는다.',
+      '팬에 버터를 녹이고 계란물을 식빵 크기의 네모로 부쳐 양면을 익힌다.',
+      '같은 팬에 식빵 양면을 노릇하게 굽는다.',
+      '식빵 - 계란 - 설탕 한 꼬집 - 케찹과 마요네즈 - 식빵 순으로 덮는다.'
+    ],
+    tip: '설탕 한 꼬집이 길거리 토스트 맛의 정체입니다. 빼지 마세요.'
+  },
+  {
+    id: 'ham-cheese-toast', family: '토스트·샌드위치', label: '햄치즈', name: '햄치즈 토스트', category: '양식', kind: '간식·분식',
+    time: 10, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['식빵', '햄', '치즈'],
+    optional: ['버터', '계란', '머스타드', '마요네즈', '양상추', '토마토', '후추'],
+    steps: [
+      '식빵 안쪽 면에 버터를 바르고 바깥쪽에도 얇게 바른다.',
+      '한 장에 치즈 - 햄 - 치즈 순으로 올린다. (치즈가 햄을 감싸야 잘 붙는다)',
+      '머스타드나 마요네즈를 살짝 바르고 다른 식빵을 덮는다.',
+      '약불 팬에 올리고 뒤집개로 가볍게 누르며 3분 굽는다.',
+      '뒤집어 2분 더 구워 치즈가 녹으면 반으로 썬다.'
+    ],
+    tip: '약불에서 천천히 구워야 치즈가 녹기 전에 빵이 타지 않습니다.'
+  },
+  {
+    id: 'duruchigi-ganjang', family: '제육볶음', label: '간장', name: '간장 두루치기', category: '한식', kind: '볶음·구이',
+    time: 25, difficulty: '쉬움', servings: 2, veg: false,
+    essential: ['돼지고기', '간장'],
+    optional: ['양파', '대파', '당근', '버섯', '양배추', '설탕', '다진마늘', '참기름', '후추', '맛술', '청양고추'],
+    steps: [
+      '돼지고기 400g을 먹기 좋게 썬다.',
+      '간장 3큰술, 설탕 1.5큰술, 다진마늘 1큰술, 맛술 1큰술, 후추를 섞어 고기에 버무린다.',
+      '20분 재운 뒤 센불로 달군 팬에 고기를 펼쳐 넣고 4분 볶는다.',
+      '양파·당근·버섯을 넣고 3분 더 볶는다.',
+      '대파와 참기름을 넣고 섞어 마무리한다.'
+    ],
+    tip: '맵지 않은 제육볶음입니다. 고추장 버전과 재료는 같고 양념만 다릅니다.'
+  },
+  {
+    id: 'spam-mayo-bap', family: '덮밥', label: '스팸마요', name: '스팸마요 덮밥', category: '한식', kind: '밥·면',
+    time: 12, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['밥', '스팸', '마요네즈'],
+    optional: ['계란', '양파', '간장', '설탕', '김', '깨', '대파', '스리라차', '치즈'],
+    steps: [
+      '스팸을 1cm 깍둑썰기 해 기름 없는 팬에 노릇하게 굽는다.',
+      '간장 1큰술과 설탕 1작은술을 넣어 30초 조린다.',
+      '밥 위에 스팸을 올린다.',
+      '마요네즈를 지그재그로 뿌리고 계란프라이를 올린다.',
+      '김가루와 깨, 다진 대파를 뿌린다.'
+    ],
+    tip: '스팸을 간장에 살짝 조리면 밥과 훨씬 잘 어울립니다.'
+  },
+  {
+    id: 'gyeran-jjim-micro', family: '계란찜', label: '전자레인지', name: '전자레인지 계란찜', category: '한식', kind: '반찬',
+    time: 7, difficulty: '쉬움', servings: 1, veg: true,
+    essential: ['계란'],
+    optional: ['대파', '당근', '새우젓', '참기름', '깨', '치즈'],
+    steps: [
+      '전자레인지용 그릇에 계란 2개를 풀고 물 100ml를 섞는다.',
+      '소금 1/4작은술로 간하고 체에 한 번 거른다.',
+      '랩을 씌우고 포크로 구멍을 두세 개 낸다.',
+      '600W 기준 1분 30초 돌린 뒤 꺼내 한 번 젓는다.',
+      '다시 1분 돌리고, 덜 익었으면 30초씩 더 돌린다. 대파와 참기름을 올린다.'
+    ],
+    tip: '한 번에 오래 돌리면 터집니다. 중간에 한 번 젓는 게 핵심입니다.'
   }
 ];
