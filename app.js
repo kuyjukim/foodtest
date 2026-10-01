@@ -398,14 +398,23 @@
 
   /* ── 장보기 (쿠팡 파트너스) ───────────────────── */
 
-  // 제휴 관계가 실제로 있는 상태인가. 파트너스 아이디나 직접 만든 링크가 있어야 참.
+  // Open API 로 미리 만들어 둔 딥링크 (tools/gen-coupang-links.js 가 생성)
+  var DEEPLINKS = window.COUPANG_LINKS || {};
+
+  // 제휴 관계가 실제로 있는 상태인가. 셋 중 하나라도 있어야 참.
   function isAffiliate() {
-    return !!(AFF.enabled && (AFF.partnerId || (AFF.links && Object.keys(AFF.links).length)));
+    if (!AFF.enabled) return false;
+    if (AFF.partnerId) return true;
+    if (AFF.links && Object.keys(AFF.links).length) return true;
+    return Object.keys(DEEPLINKS).length > 0;
   }
 
+  // 링크를 고르는 순서: 손으로 넣은 것 > 자동 생성 딥링크 > 검색
+  // 딥링크가 수수료 추적이 가장 확실하므로 검색보다 먼저 쓴다.
   function shopUrl(name) {
     if (!AFF.enabled) return null;
     if (AFF.links && AFF.links[name]) return AFF.links[name];
+    if (DEEPLINKS[name]) return DEEPLINKS[name];
     if (!AFF.searchBase) return null;
     var term = (AFF.searchTerms && AFF.searchTerms[name]) || name;
     var url = AFF.searchBase + '?q=' + encodeURIComponent(term) + '&channel=user';

@@ -92,25 +92,57 @@ partnerId: 'AF1234567',   // partners.coupang.com 우측 상단 아이디
 (제휴 관계가 없으니 고지할 것도 없음) 아이디를 넣는 순간 추적 태그가 붙고 고지 문구가 자동으로 켜집니다.
 `enabled: false` 로 두면 장보기 칸 자체가 사라집니다.
 
-### 수수료가 실제로 잡히게 하려면
+### 링크를 고르는 순서
 
-링크를 만드는 방법이 두 가지인데 **신뢰도가 다릅니다.**
+재료 하나당 링크 후보가 셋이고, 수수료 추적이 확실한 쪽부터 씁니다.
 
-| 방법 | 동작 | 추적 |
-| --- | --- | --- |
-| `links` 에 직접 넣은 링크 | 파트너스에서 생성한 `link.coupang.com/a/...` 단축 URL | 확실함 |
-| 검색 링크 (기본값) | 쿠팡 검색 주소에 `lptag` 를 붙임 | **보장 못 함** |
+| 순위 | 출처 | 추적 | 만드는 법 |
+| --- | --- | --- | --- |
+| 1 | `affiliate.js` 의 `links` | 확실함 | 파트너스에서 손으로 생성 |
+| 2 | `data/coupang-links.js` | 확실함 | **Open API 로 자동 생성** (아래) |
+| 3 | 검색 링크 | 보장 못 함 | 자동. 위 둘이 없을 때만 |
 
-검색 링크는 편의를 위한 기본값일 뿐입니다. 쿠팡이 공식적으로 안내하는 방식이 아니라서
-수수료가 안 잡힐 수 있습니다. **자주 나오는 재료는 파트너스에서 링크를 직접 만들어
-`links` 에 넣으세요.** 거기 있는 재료는 검색 링크 대신 그 링크를 씁니다.
+검색 링크(`쿠팡 검색 주소 + lptag`)는 쿠팡이 공식 안내하는 방식이 아니라서
+수수료가 안 잡힐 수 있습니다. 자동 생성을 한 번 돌려두면 대부분의 재료가 2번으로 올라갑니다.
 
-```js
-links: {
-  '돼지고기': 'https://link.coupang.com/a/XXXXXX',
-  '계란':     'https://link.coupang.com/a/YYYYYY',
-}
+### Open API 로 딥링크 자동 생성
+
+`tools/gen-coupang-links.js` 가 재료 122개의 쿠팡 검색 주소를
+파트너스 Open API 에 넣어 `link.coupang.com/a/...` 딥링크로 바꿔
+`data/coupang-links.js` 에 저장합니다.
+
+**왜 브라우저에서 직접 부르지 않나** — Open API 는 SECRET KEY 로 HMAC 서명을 요구합니다.
+이 앱은 서버가 없는 정적 사이트라서, 브라우저에서 API 를 부르려면 비밀키를 소스에
+넣어야 하고 그 순간 전 세계에 공개됩니다. 그래서 **배포할 때 한 번** GitHub Actions
+러너에서 링크를 만들어 파일로 떨어뜨리고, 브라우저는 그 결과만 읽습니다.
+비밀키는 GitHub Secrets 에만 있고 배포되는 파일에는 들어가지 않습니다.
+
+**설정**
+
+1. 저장소 **Settings → Secrets and variables → Actions → New repository secret** 에서
+   두 개를 등록합니다.
+
+   | 이름 | 값 |
+   | --- | --- |
+   | `COUPANG_ACCESS_KEY` | 파트너스 Open API 의 ACCESS KEY |
+   | `COUPANG_SECRET_KEY` | SECRET KEY |
+
+   키는 https://partners.coupang.com/#help/open-api 에서 발급합니다.
+
+2. **Actions 탭 → '쿠팡 딥링크 생성' → Run workflow**
+
+   링크를 받아 `data/coupang-links.js` 에 쓰고, 서비스워커 캐시 버전을 올린 뒤
+   커밋·푸시합니다. 그 푸시가 Pages 배포를 다시 돌립니다.
+
+재료가 늘었을 때 다시 돌리면 새 재료만 추가됩니다.
+로컬에서 대상 목록만 확인하려면:
+
+```bash
+DRY_RUN=1 node tools/gen-coupang-links.js
 ```
+
+**키 관리** — ACCESS/SECRET KEY 는 코드나 커밋에 절대 넣지 마세요.
+어딘가에 노출됐다면 파트너스 콘솔에서 재발급하고 Secrets 를 갱신하면 됩니다.
 
 재료 이름 그대로 검색하면 엉뚱한 게 나오는 경우(`밥` → 밥솥, `배` → 선박)는
 `searchTerms` 에서 바로잡습니다. 33개를 미리 넣어 뒀고 더 추가할 수 있습니다.
@@ -163,6 +195,8 @@ icons/                 앱 아이콘 (192 / 512 / 마스커블)
 data/recipes.js        레시피 125개
 data/ingredients.js    재료 사전 (별칭·범주·같은 것·대체 재료·기본 양념·빠른 담기)
 data/affiliate.js      쿠팡 파트너스 설정 (아이디·직접링크·검색어 보정·고지 문구)
+data/coupang-links.js  Open API 로 생성한 딥링크 (자동 생성, 직접 고치지 말 것)
+tools/                 딥링크 생성 스크립트
 ```
 
 의존성이 없는 순수 HTML·CSS·JavaScript이고, 모듈이나 `fetch` 를 쓰지 않아
