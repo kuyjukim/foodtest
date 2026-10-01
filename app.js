@@ -8,6 +8,7 @@
   var SWAPS = window.SWAPS || {};
   var STAPLES = window.PANTRY_STAPLES || [];
   var CATEGORIES = window.INGREDIENT_CATEGORIES || [];
+  var AFF = window.AFFILIATE || {};
 
   var LS = { pantry: 'fridge.pantry', staples: 'fridge.staples', theme: 'fridge.theme' };
 
@@ -189,7 +190,7 @@
   ['ingInput', 'suggest', 'chips', 'pantryCount', 'pantryEmpty', 'clearBtn', 'quickPick',
    'staples', 'searchInput', 'kindSel', 'timeSel', 'sortSel', 'makeableOnly', 'vegOnly',
    'summary', 'cards', 'noResult', 'modal', 'modalTitle', 'modalTabs', 'modalMeta',
-   'modalBody', 'themeBtn', 'installBtn'
+   'modalBody', 'themeBtn', 'installBtn', 'disclosure'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
   /* ── 내 재료 ──────────────────────────────────── */
@@ -394,6 +395,50 @@
     return p;
   }
 
+
+  /* ── 장보기 (쿠팡 파트너스) ───────────────────── */
+
+  // 제휴 관계가 실제로 있는 상태인가. 파트너스 아이디나 직접 만든 링크가 있어야 참.
+  function isAffiliate() {
+    return !!(AFF.enabled && (AFF.partnerId || (AFF.links && Object.keys(AFF.links).length)));
+  }
+
+  function shopUrl(name) {
+    if (!AFF.enabled) return null;
+    if (AFF.links && AFF.links[name]) return AFF.links[name];
+    if (!AFF.searchBase) return null;
+    var term = (AFF.searchTerms && AFF.searchTerms[name]) || name;
+    var url = AFF.searchBase + '?q=' + encodeURIComponent(term) + '&channel=user';
+    if (AFF.partnerId) url += '&lptag=' + encodeURIComponent(AFF.partnerId);
+    return url;
+  }
+
+  function shopChip(name) {
+    var url = shopUrl(name);
+    if (!url) return '<span class="shop-chip">' + esc(name) + '</span>';
+    return '<a class="shop-chip link" href="' + esc(url) + '" data-ing="' + esc(name) + '"' +
+           ' target="_blank" rel="nofollow sponsored noopener noreferrer">' +
+           esc(name) + '<span class="go">쿠팡 ↗</span></a>';
+  }
+
+  function shopSection(m) {
+    if (!AFF.enabled || (!m.missEss.length && !m.missOpt.length)) return '';
+    var html = '<h3>장보기</h3><div class="shop">';
+    if (m.missEss.length) {
+      html += '<div class="shop-row"><span class="shop-label need">필수</span><span class="shop-chips">' +
+              m.missEss.map(shopChip).join('') + '</span></div>';
+    }
+    if (m.missOpt.length) {
+      html += '<div class="shop-row"><span class="shop-label">선택</span><span class="shop-chips">' +
+              m.missOpt.map(shopChip).join('') + '</span></div>';
+    }
+    html += '</div>';
+    if (isAffiliate() && AFF.disclosure) {
+      html += '<p class="disclosure in-modal">' + esc(AFF.disclosure) + '</p>';
+    }
+    return html;
+  }
+
   /* ── 상세 보기 (버전 탭) ──────────────────────── */
 
   var familyIndex = (function () {
@@ -469,13 +514,15 @@
       }).join('') + '</ul>';
     }
 
-    if (cur.missEss.length) {
+    if (cur.missEss.length && !AFF.enabled) {
       html += '<p class="sub">아직 없는 재료: <b>' + esc(cur.missEss.join(', ')) + '</b></p>';
     }
 
     html += '<h3>만드는 순서</h3><ol class="steps">' +
       r.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>';
     if (r.tip) html += '<p class="tip">💡 ' + esc(r.tip) + '</p>';
+
+    html += shopSection(cur);
 
     el.modalBody.innerHTML = html;
     el.modalBody.scrollTop = 0;
@@ -700,6 +747,11 @@
     if (window.innerWidth <= 860) {
       var quickGroup = el.quickPick.closest('details');
       if (quickGroup) quickGroup.open = false;
+    }
+
+    if (isAffiliate() && AFF.disclosure) {
+      el.disclosure.textContent = AFF.disclosure;
+      el.disclosure.hidden = false;
     }
 
     renderQuickPick();
