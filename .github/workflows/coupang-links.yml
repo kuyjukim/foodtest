@@ -10,11 +10,20 @@ on:
         default: ''
 
 permissions:
-  contents: write
+  contents: write     # 생성 결과를 커밋
+  pages: write        # 바로 배포까지
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,11 +43,11 @@ jobs:
         run: |
           set -euo pipefail
           if git diff --quiet -- data/coupang-links.js; then
-            echo "링크에 변경이 없습니다."
+            echo "링크에 변경이 없습니다. 배포만 다시 합니다."
             exit 0
           fi
 
-          # 캐시 버전을 올려야 이미 설치한 사람에게 새 링크가 전달된다
+          # 캐시 버전을 올려야 이미 방문한 사람에게 새 링크가 전달된다
           cur=$(sed -n "s/.*fridge-recipe-v\([0-9]\+\).*/\1/p" sw.js | head -1)
           next=$((cur + 1))
           sed -i "s/fridge-recipe-v$cur/fridge-recipe-v$next/" sw.js
@@ -49,3 +58,12 @@ jobs:
           git add data/coupang-links.js sw.js
           git commit -m "쿠팡 딥링크 갱신 (자동 생성)"
           git push
+
+      # 워크플로가 푸시한 커밋은 다른 워크플로를 트리거하지 않는다.
+      # 그래서 Pages 배포를 이 잡 안에서 직접 한다. 방금 만든 파일이 그대로 올라간다.
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
