@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>냉장고 레시피</title>
+<meta name="description" content="집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아줍니다.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">🍳</span>
+    <div>
+      <h1>냉장고 레시피</h1>
+      <p>집에 있는 재료를 담으면 지금 만들 수 있는 요리를 찾아줍니다</p>
+    </div>
+  </div>
+  <button id="themeBtn" class="icon-btn" type="button" aria-label="밝은 화면과 어두운 화면 전환">🌙</button>
+</header>
+
+<main class="layout">
+  <aside class="panel">
+    <div class="panel-head">
+      <h2>내 재료 <span id="pantryCount" class="count">0</span></h2>
+      <button id="clearBtn" class="link-btn" type="button" hidden>전체 비우기</button>
+    </div>
+
+    <div class="input-wrap">
+      <input id="ingInput" type="text" placeholder="재료 이름 입력 (예: 계란)"
+             autocomplete="off" aria-label="재료 이름" aria-expanded="false"
+             aria-controls="suggest" role="combobox">
+      <ul id="suggest" class="suggest" role="listbox" hidden></ul>
+    </div>
+
+    <div id="chips" class="chips" aria-live="polite"></div>
+    <p id="pantryEmpty" class="muted small">아래 <b>빠르게 담기</b>에서 골라도 됩니다.</p>
+
+    <details class="group" open>
+      <summary>빠르게 담기</summary>
+      <div id="quickPick" class="quick"></div>
+    </details>
+
+    <details class="group">
+      <summary>기본 양념 <span class="hint">집에 있다고 가정</span></summary>
+      <p class="muted small">없는 양념은 체크를 해제하세요. 해제하면 그 양념이 필요한 요리는 ‘재료 부족’으로 표시됩니다.</p>
+      <div id="staples" class="staple-list"></div>
+    </details>
+  </aside>
+
+  <section class="results">
+    <div class="toolbar">
+      <input id="searchInput" class="search" type="search" placeholder="요리 이름 검색" aria-label="요리 이름 검색">
+      <div class="selects">
+        <label>종류
+          <select id="kindSel">
+            <option value="">전체</option>
+          </select>
+        </label>
+        <label>시간
+          <select id="timeSel">
+            <option value="">전체</option>
+            <option value="15">15분 이내</option>
+            <option value="25">25분 이내</option>
+            <option value="40">40분 이내</option>
+          </select>
+        </label>
+        <label>정렬
+          <select id="sortSel">
+            <option value="match">추천순</option>
+            <option value="time">조리시간 짧은순</option>
+            <option value="few">재료 적은순</option>
+            <option value="name">이름순</option>
+          </select>
+        </label>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="readyOnly"> 바로 만들 수 있는 것만</label>
+        <label><input type="checkbox" id="vegOnly"> 고기·해산물 없이</label>
+      </div>
+    </div>
+
+    <p id="summary" class="summary" aria-live="polite"></p>
+    <div id="cards" class="cards"></div>
+    <p id="noResult" class="empty" hidden></p>
+  </section>
+</main>
+
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="닫기">✕</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalMeta" class="meta-row"></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="data/ingredients.js"></script>
+<script src="data/recipes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
