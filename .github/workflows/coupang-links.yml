@@ -25,7 +25,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      # rebase 가 가능하도록 전체 히스토리를 받는다 (얕은 클론이면 재시도가 막힌다)
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -57,7 +60,19 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/coupang-links.js sw.js
           git commit -m "쿠팡 딥링크 갱신 (자동 생성)"
-          git push
+
+          # 이 워크플로가 두 번 겹쳐 돌면 나중 것이 'fetch first' 로 거부된다.
+          # 원격을 가져와 붙인 뒤 다시 민다.
+          for try in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "푸시 성공"
+              exit 0
+            fi
+            echo "푸시 거부됨 — 원격을 가져와 재시도 ($try/3)"
+            git pull --rebase origin main
+          done
+          echo "3번 시도 후에도 푸시하지 못했습니다."
+          exit 1
 
       # 워크플로가 푸시한 커밋은 다른 워크플로를 트리거하지 않는다.
       # 그래서 Pages 배포를 이 잡 안에서 직접 한다. 방금 만든 파일이 그대로 올라간다.
