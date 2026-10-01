@@ -127,9 +127,11 @@ links: {
 쿠팡 파트너스는 공개된 사이트가 있어야 의미가 있고, 서비스워커(오프라인·앱 설치)도
 HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 
-1. 이 브랜치를 `main` 에 머지합니다.
-2. 저장소 **Settings → Pages → Source** 를 **GitHub Actions** 로 바꿉니다.
-3. `main` 에 푸시될 때마다 `.github/workflows/deploy.yml` 이 알아서 배포합니다.
+1. 저장소 **Settings → Pages → Source** 를 **GitHub Actions** 로 바꿉니다.
+   이 한 번은 손으로 해야 합니다. 워크플로 토큰에는 Pages 를 켤 권한이 없어서
+   꺼진 상태로 배포하면 `Get Pages site failed` 로 실패합니다.
+2. 그 뒤로는 `main` 에 푸시될 때마다 `.github/workflows/deploy.yml` 이 알아서 배포합니다.
+   이미 푸시해 둔 상태라면 Actions 탭에서 **Re-run jobs** 를 누르면 됩니다.
 
 주소는 `https://<아이디>.github.io/<저장소이름>/` 형태가 됩니다.
 저장소 이름이 경로로 붙지만 앱의 모든 경로가 상대 경로라 그대로 동작합니다.

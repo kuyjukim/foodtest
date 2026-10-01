@@ -24,11 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 빌드 과정이 없는 정적 사이트라 파일을 그대로 올린다
-      # enablement: 저장소에 Pages 가 꺼져 있으면 워크플로가 직접 켠다
+      # Pages 는 Settings 에서 미리 켜 둬야 한다.
+      # (워크플로 토큰에는 Pages 를 생성할 권한이 없다)
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
+
+      # 빌드 과정이 없는 정적 사이트라 파일을 그대로 올린다
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
