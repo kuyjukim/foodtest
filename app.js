@@ -425,8 +425,10 @@
   function shopChip(name) {
     var url = shopUrl(name);
     if (!url) return '<span class="shop-chip">' + esc(name) + '</span>';
+    // noreferrer 는 일부러 넣지 않는다. 쿠팡으로 넘어갈 때 리퍼러 헤더까지 지워져
+    // 제휴 유입 출처 확인에 불리하다. noopener 만으로 탭내빙은 막힌다.
     return '<a class="shop-chip link" href="' + esc(url) + '" data-ing="' + esc(name) + '"' +
-           ' target="_blank" rel="nofollow sponsored noopener noreferrer">' +
+           ' target="_blank" rel="nofollow sponsored noopener">' +
            esc(name) + '<span class="go">쿠팡 ↗</span></a>';
   }
 
