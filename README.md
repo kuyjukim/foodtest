@@ -122,9 +122,35 @@ links: {
 
 링크에는 `rel="nofollow sponsored noopener noreferrer"` 가 붙고 새 탭으로 열립니다.
 
+## 온라인에 올리기
+
+쿠팡 파트너스는 공개된 사이트가 있어야 의미가 있고, 서비스워커(오프라인·앱 설치)도
+HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
+
+1. 이 브랜치를 `main` 에 머지합니다.
+2. 저장소 **Settings → Pages → Source** 를 **GitHub Actions** 로 바꿉니다.
+3. `main` 에 푸시될 때마다 `.github/workflows/deploy.yml` 이 알아서 배포합니다.
+
+주소는 `https://<아이디>.github.io/<저장소이름>/` 형태가 됩니다.
+저장소 이름이 경로로 붙지만 앱의 모든 경로가 상대 경로라 그대로 동작합니다.
+(manifest 의 `start_url`·`scope`, 서비스워커 범위, 캐시 모두 그 폴더 안으로 잡힙니다)
+
+### 자체 도메인
+
+쿠팡 파트너스는 채널(사이트) 등록과 심사를 거쳐야 수익이 발생합니다.
+`github.io` 주소가 심사를 통과할지는 쿠팡 쪽 기준이라 장담할 수 없습니다.
+반려되면 도메인을 하나 붙이는 게 가장 빠릅니다.
+
+1. Settings → Pages → Custom domain 에 도메인 입력
+2. 도메인 DNS 에 `CNAME` 레코드를 `<아이디>.github.io` 로 지정
+3. Enforce HTTPS 체크
+
+도메인을 붙이면 주소가 루트가 되므로 경로 문제는 더 간단해집니다.
+
 ## 파일
 
 ```
+.github/workflows/     GitHub Pages 자동 배포
 index.html             화면 구조
 styles.css             스타일 (밝은/어두운 화면)
 app.js                 재료 매칭, 대체 판정, 버전 묶기, 자동완성, 설치, 장보기 링크
