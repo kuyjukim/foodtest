@@ -1,6 +1,6 @@
 {
-  "name": "냉장고 레시피",
-  "short_name": "냉장고레시피",
+  "name": "오늘 뭐 먹지?",
+  "short_name": "오늘뭐먹지",
   "description": "집에 있는 재료로 지금 만들 수 있는 요리를 찾아줍니다.",
   "lang": "ko",
   "dir": "ltr",
