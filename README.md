@@ -143,6 +143,16 @@ partnerId: 'AF1234567',   // partners.coupang.com 우측 상단 아이디
 쿠키 유효 기간 안이면 수수료 대상이 됩니다. 검색어가 엉뚱해지는 재료 31개는
 `searchTerms` 에서 미리 바로잡아 뒀습니다 (`밥` → 즉석밥, `배` → 배 과일).
 
+### 상품 정보까지 (선택)
+
+같은 워크플로의 **상품 정보 생성** 단계가 상품검색 API 로 재료별 실제 상품을
+가져와 `data/coupang-products.js` 에 저장합니다. 장보기 칸에서 **없는 필수 재료**는
+상품명·가격·이미지·로켓배송 여부가 담긴 카드로 바뀌고, 누르면 검색이 아니라
+그 상품으로 바로 갑니다. 상품을 못 찾은 재료는 기존 링크 칩으로 남습니다.
+
+가격은 생성 시점의 값이라 화면에 기준일을 함께 표시합니다. 가끔 다시 돌려 주세요.
+상품이 필요 없으면 Run workflow 에서 `products` 체크를 끄면 됩니다.
+
 재료가 늘었을 때 다시 돌리면 새 재료만 추가됩니다.
 로컬에서 대상 목록만 확인하려면:
 
@@ -219,7 +229,9 @@ data/recipes.js        레시피 125개
 data/ingredients.js    재료 사전 (별칭·범주·같은 것·대체 재료·기본 양념·빠른 담기)
 data/affiliate.js      쿠팡 파트너스 설정 (아이디·직접링크·검색어 보정·고지 문구)
 data/coupang-links.js  Open API 로 생성한 딥링크 (자동 생성, 직접 고치지 말 것)
-tools/                 딥링크 생성 스크립트
+data/coupang-products.js  상품검색 API 로 가져온 상품 (자동 생성)
+tools/coupang-api.js      쿠팡 API 서명·호출 공용 모듈
+tools/gen-coupang-*.js    딥링크 / 상품 생성 스크립트
 ```
 
 의존성이 없는 순수 HTML·CSS·JavaScript이고, 모듈이나 `fetch` 를 쓰지 않아

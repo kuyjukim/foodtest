@@ -345,3 +345,32 @@ body {
   max-width: 1180px; margin: 0 auto; padding: 0 16px 40px;
   text-align: center;
 }
+
+/* ── 상품 카드 ───────────────────────────── */
+.prod-list { display: grid; gap: 8px; margin-bottom: 10px; }
+.prod {
+  display: flex; gap: 11px; align-items: center; text-decoration: none;
+  padding: 9px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--surface-2); color: var(--text);
+}
+.prod:hover { border-color: var(--accent); }
+.prod img, .prod-noimg {
+  width: 56px; height: 56px; flex: none; border-radius: 8px;
+  object-fit: cover; background: var(--surface);
+}
+.prod-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.prod-for {
+  font-size: 11px; font-weight: 600; color: var(--accent);
+}
+.prod-name {
+  font-size: 13px; line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.prod-meta { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-dim); }
+.prod-meta b { color: var(--text); font-size: 13.5px; }
+.rocket {
+  font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
+  background: var(--swap-soft); color: var(--swap);
+}
+.asof { font-size: 11.5px; color: var(--text-dim); margin: 0 0 10px; }

@@ -400,13 +400,17 @@
 
   // Open API 로 미리 만들어 둔 딥링크 (tools/gen-coupang-links.js 가 생성)
   var DEEPLINKS = window.COUPANG_LINKS || {};
+  // 재료별 실제 상품 (tools/gen-coupang-products.js 가 생성)
+  var PRODUCTS = window.COUPANG_PRODUCTS || {};
+  var PRODUCTS_ASOF = window.COUPANG_PRODUCTS_ASOF || '';
 
   // 제휴 관계가 실제로 있는 상태인가. 셋 중 하나라도 있어야 참.
   function isAffiliate() {
     if (!AFF.enabled) return false;
     if (AFF.partnerId) return true;
     if (AFF.links && Object.keys(AFF.links).length) return true;
-    return Object.keys(DEEPLINKS).length > 0;
+    if (Object.keys(DEEPLINKS).length) return true;
+    return Object.keys(PRODUCTS).length > 0;
   }
 
   // 링크를 고르는 순서: 손으로 넣은 것 > 자동 생성 딥링크 > 검색
@@ -432,18 +436,60 @@
            esc(name) + '<span class="go">쿠팡 ↗</span></a>';
   }
 
+  function won(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+  }
+
+  // 없는 필수 재료는 실제 상품 카드로 보여준다. 선택 재료는 칩으로만.
+  function productCards(names) {
+    var cards = [];
+    names.forEach(function (name) {
+      (PRODUCTS[name] || []).forEach(function (p) {
+        if (!p.url) return;
+        cards.push(
+          '<a class="prod" href="' + esc(p.url) + '" data-ing="' + esc(name) + '"' +
+          ' target="_blank" rel="nofollow sponsored noopener">' +
+            (p.image ? '<img src="' + esc(p.image) + '" alt="" loading="lazy">' : '<span class="prod-noimg"></span>') +
+            '<span class="prod-body">' +
+              '<span class="prod-for">' + esc(name) + '</span>' +
+              '<span class="prod-name">' + esc(p.name || '') + '</span>' +
+              '<span class="prod-meta">' +
+                (p.price ? '<b>' + won(p.price) + '</b>' : '') +
+                (p.rocket ? '<span class="rocket">로켓배송</span>' : '') +
+              '</span>' +
+            '</span>' +
+          '</a>');
+      });
+    });
+    return cards;
+  }
+
   function shopSection(m) {
     if (!AFF.enabled || (!m.missEss.length && !m.missOpt.length)) return '';
-    var html = '<h3>장보기</h3><div class="shop">';
-    if (m.missEss.length) {
+
+    var html = '<h3>장보기</h3>';
+    var cards = productCards(m.missEss);
+
+    if (cards.length) {
+      html += '<div class="prod-list">' + cards.join('') + '</div>';
+      if (PRODUCTS_ASOF) {
+        html += '<p class="asof">가격은 ' + esc(PRODUCTS_ASOF) + ' 기준이라 지금과 다를 수 있습니다.</p>';
+      }
+    }
+
+    // 상품 카드로 못 채운 재료는 링크 칩으로
+    var chipEss = m.missEss.filter(function (n) { return !(PRODUCTS[n] && PRODUCTS[n].length); });
+    html += '<div class="shop">';
+    if (chipEss.length) {
       html += '<div class="shop-row"><span class="shop-label need">필수</span><span class="shop-chips">' +
-              m.missEss.map(shopChip).join('') + '</span></div>';
+              chipEss.map(shopChip).join('') + '</span></div>';
     }
     if (m.missOpt.length) {
       html += '<div class="shop-row"><span class="shop-label">선택</span><span class="shop-chips">' +
               m.missOpt.map(shopChip).join('') + '</span></div>';
     }
     html += '</div>';
+
     if (isAffiliate() && AFF.disclosure) {
       html += '<p class="disclosure in-modal">' + esc(AFF.disclosure) + '</p>';
     }

@@ -15,101 +15,37 @@
  */
 'use strict';
 
-const crypto = require('crypto');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const { BASE, request, withRetry, sleep, loadData, loadIngredients } = require('./coupang-api.js');
 
-const HOST = 'api-gateway.coupang.com';
-const API_PATH = '/v2/providers/affiliate_open_api/apis/openapi/v1/deeplink';
+const API_PATH = BASE + '/deeplink';
 const OUT = path.join(__dirname, '..', 'data', 'coupang-links.js');
 const BATCH = 20;          // 한 번에 보낼 URL 수
 const GAP_MS = 1200;       // 호출 사이 간격 (레이트리밋 회피)
 
-/* ── 서명 ──────────────────────────────────────
- * Authorization: CEA algorithm=HmacSHA256, access-key=..., signed-date=..., signature=...
- * 서명 대상 문자열 = signed-date + method + path + query
- * signed-date 는 GMT 기준 yymmddTHHmmssZ
- */
-function signature(method, urlPath, query, accessKey, secretKey) {
-  const d = new Date();
-  const p = n => String(n).padStart(2, '0');
-  const signedDate =
-    p(d.getUTCFullYear() % 100) + p(d.getUTCMonth() + 1) + p(d.getUTCDate()) +
-    'T' + p(d.getUTCHours()) + p(d.getUTCMinutes()) + p(d.getUTCSeconds()) + 'Z';
-
-  const message = signedDate + method + urlPath + query;
-  const sig = crypto.createHmac('sha256', secretKey).update(message).digest('hex');
-  return `CEA algorithm=HmacSHA256, access-key=${accessKey}, signed-date=${signedDate}, signature=${sig}`;
-}
-
-function callApi(urls, accessKey, secretKey, subId) {
-  const body = JSON.stringify(subId ? { coupangUrls: urls, subId } : { coupangUrls: urls });
-  const auth = signature('POST', API_PATH, '', accessKey, secretKey);
-
-  return new Promise((resolve, reject) => {
-    const req = https.request({
-      host: HOST, path: API_PATH, method: 'POST',
-      headers: {
-        'Authorization': auth,
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Content-Length': Buffer.byteLength(body)
-      },
-      timeout: 30000
-    }, res => {
-      let raw = '';
-      res.on('data', c => raw += c);
-      res.on('end', () => {
-        let json = null;
-        try { json = JSON.parse(raw); } catch (e) { /* 아래에서 처리 */ }
-        if (res.statusCode !== 200 || !json) {
-          return reject(new Error(`HTTP ${res.statusCode} — ${raw.slice(0, 400)}`));
-        }
-        if (json.rCode && json.rCode !== '0') {
-          return reject(new Error(`rCode ${json.rCode} — ${json.rMessage || ''}`));
-        }
-        resolve(json.data || []);
-      });
-    });
-    req.on('timeout', () => req.destroy(new Error('30초 안에 응답이 없음')));
-    req.on('error', reject);
-    req.end(body);
-  });
+function callApi(urls, keys, subId) {
+  const body = subId ? { coupangUrls: urls, subId } : { coupangUrls: urls };
+  return request('POST', API_PATH, '', body, keys).then(d => d || []);
 }
 
 /* ── 대상 재료 모으기 ──────────────────────── */
 
 function loadTargets() {
-  global.window = {};
-  require('../data/affiliate.js');
-  require('../data/ingredients.js');
-  require('../data/recipes.js');
-  const w = global.window;
-
-  const used = new Set();
-  w.RECIPES.forEach(r => r.essential.concat(r.optional).forEach(i => used.add(i)));
-
-  // 기본 양념은 집에 있다고 보므로 장보기 목록에 잘 안 뜬다. 제외해 호출 수를 아낀다.
-  const staples = new Set(w.PANTRY_STAPLES);
-  const terms = w.AFFILIATE.searchTerms || {};
-  const base = w.AFFILIATE.searchBase;
-
-  return [...used]
-    .filter(i => !staples.has(i))
-    .sort((a, b) => a.localeCompare(b, 'ko'))
-    .map(ing => ({
-      ing,
-      url: `${base}?q=${encodeURIComponent(terms[ing] || ing)}&channel=user`
-    }));
+  const base = loadData().AFFILIATE.searchBase;
+  return loadIngredients().map(({ ing, term }) => ({
+    ing,
+    url: `${base}?q=${encodeURIComponent(term)}&channel=user`
+  }));
 }
 
 /* ── 실행 ─────────────────────────────────── */
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-
 (async () => {
-  const accessKey = process.env.COUPANG_ACCESS_KEY;
-  const secretKey = process.env.COUPANG_SECRET_KEY;
+  const keys = {
+    accessKey: process.env.COUPANG_ACCESS_KEY,
+    secretKey: process.env.COUPANG_SECRET_KEY
+  };
   const subId = process.env.COUPANG_SUB_ID || '';
 
   const targets = loadTargets();
@@ -121,7 +57,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     console.log('DRY_RUN 이므로 API 는 호출하지 않았습니다.');
     return;
   }
-  if (!accessKey || !secretKey) {
+  if (!keys.accessKey || !keys.secretKey) {
     console.error('COUPANG_ACCESS_KEY / COUPANG_SECRET_KEY 환경변수가 필요합니다.');
     process.exit(1);
   }
@@ -133,7 +69,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const chunk = targets.slice(i, i + BATCH);
     const label = `${i + 1}~${Math.min(i + BATCH, targets.length)}`;
     try {
-      const data = await callApi(chunk.map(t => t.url), accessKey, secretKey, subId);
+      const data = await withRetry(() => callApi(chunk.map(t => t.url), keys, subId), { label: label });
       // 응답이 요청 순서를 지킨다는 보장이 없으므로 originalUrl 로 되짚는다
       const byUrl = {};
       data.forEach(d => { if (d.originalUrl) byUrl[d.originalUrl] = d.shortenUrl || d.landingUrl; });

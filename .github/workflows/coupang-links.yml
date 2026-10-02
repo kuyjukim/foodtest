@@ -1,4 +1,4 @@
-name: 쿠팡 딥링크 생성
+name: 쿠팡 링크·상품 생성
 
 # 손으로 돌린다. 재료가 늘었거나 링크를 새로 받고 싶을 때 Actions 탭에서 실행.
 on:
@@ -8,6 +8,11 @@ on:
         description: '하위 채널 구분자 (선택, 비워도 됨)'
         required: false
         default: ''
+      products:
+        description: '상품 정보까지 새로 받기 (가격이 바뀌므로 가끔만)'
+        type: boolean
+        required: false
+        default: true
 
 permissions:
   contents: write     # 생성 결과를 커밋
@@ -42,10 +47,18 @@ jobs:
           COUPANG_SUB_ID: ${{ inputs.sub_id }}
         run: node tools/gen-coupang-links.js
 
+      # 상품검색은 재료당 1회라 딥링크보다 오래 걸린다 (약 3분)
+      - name: 상품 정보 생성
+        if: ${{ inputs.products }}
+        env:
+          COUPANG_ACCESS_KEY: ${{ secrets.COUPANG_ACCESS_KEY }}
+          COUPANG_SECRET_KEY: ${{ secrets.COUPANG_SECRET_KEY }}
+        run: node tools/gen-coupang-products.js
+
       - name: 바뀐 게 있으면 커밋
         run: |
           set -euo pipefail
-          if git diff --quiet -- data/coupang-links.js; then
+          if git diff --quiet -- data/coupang-links.js data/coupang-products.js; then
             echo "링크에 변경이 없습니다. 배포만 다시 합니다."
             exit 0
           fi
@@ -58,7 +71,7 @@ jobs:
 
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/coupang-links.js sw.js
+          git add data/coupang-links.js data/coupang-products.js sw.js
           git commit -m "쿠팡 딥링크 갱신 (자동 생성)"
 
           # 이 워크플로가 두 번 겹쳐 돌면 나중 것이 'fetch first' 로 거부된다.
