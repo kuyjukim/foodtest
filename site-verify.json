@@ -2,6 +2,6 @@
   "_설명": "검색엔진 사이트 소유확인 코드. 발급받아 content 값만 채우면 됩니다. 비어 있으면 태그를 넣지 않습니다.",
   "_네이버": "searchadvisor.naver.com → 웹마스터도구 → 사이트 등록 → HTML 태그 방식의 content 값",
   "_구글": "search.google.com/search-console → 속성 추가 → HTML 태그 방식의 content 값",
-  "naver": "",
+  "naver": "f87ebfee3ae7fbc3b6d2b2843b0bfda3a17a9302",
   "google": ""
 }
