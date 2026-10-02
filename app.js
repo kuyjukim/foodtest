@@ -586,6 +586,9 @@
   var openFamily = null;
   var shownRecipeId = null;
 
+  /* 레시피마다 주소를 남긴다 (?r=id).
+   * 이 주소를 공유하면 그 레시피가 열린 채로 뜨고, 뒤로가기로 닫힌다.
+   * 정적 레시피 페이지(recipe/*.html)의 '내 재료로 보기' 도 이 주소로 들어온다. */
   function openModal(family, recipeId) {
     lastFocused = document.activeElement;
     openFamily = family;
@@ -602,6 +605,7 @@
     var cur = variants.filter(function (m) { return m.recipe.id === recipeId; })[0] || variants[0];
     var r = cur.recipe;
     shownRecipeId = r.id;
+    pushRecipeUrl(r.id);
 
     el.modalTitle.textContent = variants.length > 1 ? family : r.name;
 
@@ -677,7 +681,20 @@
     }).join('') + '</ul>';
   }
 
-  function closeModal() {
+  function pushRecipeUrl(id) {
+    if (!window.history || !history.pushState) return;
+    var url = '?r=' + encodeURIComponent(id);
+    try {
+      // 이미 그 레시피 주소면 새 기록을 쌓지 않는다 (주소로 들어온 경우)
+      if (recipeIdFromUrl() === id) history.replaceState({ r: id }, '', url);
+      else history.pushState({ r: id }, '', url);
+    } catch (e) { /* 무시 */ }
+  }
+
+  function closeModal(fromHistory) {
+    if (!fromHistory && window.history && history.pushState && /[?&]r=/.test(location.search)) {
+      try { history.pushState({}, '', location.pathname); } catch (e) { /* 무시 */ }
+    }
     el.modal.hidden = true;
     openFamily = null;
     document.body.style.overflow = '';
@@ -688,6 +705,18 @@
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
+  }
+
+  function recipeIdFromUrl() {
+    var m = /[?&]r=([^&]+)/.exec(location.search);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function openRecipeById(id) {
+    var hit = RECIPES.filter(function (r) { return r.id === id; })[0];
+    if (!hit) return false;
+    openModal(familyOf(hit), hit.id);
+    return true;
   }
 
   /* ── 재료 담기 / 빼기 ─────────────────────────── */
@@ -818,6 +847,12 @@
   el.modal.addEventListener('click', function (e) {
     if (e.target.hasAttribute('data-close')) closeModal();
   });
+
+  window.addEventListener('popstate', function (e) {
+    var id = (e.state && e.state.r) || recipeIdFromUrl();
+    if (id) openRecipeById(id);
+    else if (!el.modal.hidden) closeModal(true);
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !el.modal.hidden) closeModal();
   });
@@ -896,5 +931,8 @@
     renderStaples();
     renderChips();
     renderResults();
+
+    var fromUrl = recipeIdFromUrl();
+    if (fromUrl) openRecipeById(fromUrl);
   })();
 })();

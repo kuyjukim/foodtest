@@ -24,6 +24,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 레시피가 바뀌면 정적 페이지와 sitemap 도 같이 새로 뽑는다
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 레시피 페이지 생성
+        run: node tools/gen-pages.js
+
       # Pages 는 Settings 에서 미리 켜 둬야 한다.
       # (워크플로 토큰에는 Pages 를 생성할 권한이 없다)
       - uses: actions/configure-pages@v5
