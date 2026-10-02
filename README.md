@@ -199,21 +199,33 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 2. 그 뒤로는 `main` 에 푸시될 때마다 `.github/workflows/deploy.yml` 이 알아서 배포합니다.
    이미 푸시해 둔 상태라면 Actions 탭에서 **Re-run jobs** 를 누르면 됩니다.
 
-주소는 `https://<아이디>.github.io/<저장소이름>/` 형태가 됩니다.
+주소는 `https://<아이디>.github.io/<저장소이름>/` 형태가 됩니다. (현재: https://kuyjukim.github.io/foodtest/)
 저장소 이름이 경로로 붙지만 앱의 모든 경로가 상대 경로라 그대로 동작합니다.
 (manifest 의 `start_url`·`scope`, 서비스워커 범위, 캐시 모두 그 폴더 안으로 잡힙니다)
 
-### 자체 도메인
+### 자체 도메인 붙이기
 
-쿠팡 파트너스는 채널(사이트) 등록과 심사를 거쳐야 수익이 발생합니다.
-`github.io` 주소가 심사를 통과할지는 쿠팡 쪽 기준이라 장담할 수 없습니다.
-반려되면 도메인을 하나 붙이는 게 가장 빠릅니다.
+**순서를 지켜야 합니다.** 저장소에 `CNAME` 파일을 먼저 올리면 GitHub 이 바로
+그 도메인으로 리다이렉트를 시작하는데, DNS 가 아직 없으면 사이트에 아무도
+접속할 수 없게 됩니다.
 
-1. Settings → Pages → Custom domain 에 도메인 입력
-2. 도메인 DNS 에 `CNAME` 레코드를 `<아이디>.github.io` 로 지정
-3. Enforce HTTPS 체크
+1. **DNS 먼저** — 도메인 관리 화면에서 `CNAME` 레코드를 추가합니다.
 
-도메인을 붙이면 주소가 루트가 되므로 경로 문제는 더 간단해집니다.
+   | 타입 | 이름(호스트) | 값 |
+   | --- | --- | --- |
+   | CNAME | `recipe` | `kuyjukim.github.io` |
+
+   값 끝에 점(`.`)을 요구하는 업체도 있습니다. 전파에 보통 몇 분 걸립니다.
+
+2. 전파 확인: `dig recipe.eliteaja.com +short` 가 `kuyjukim.github.io` 를 가리키면 완료.
+
+3. **그다음** 저장소 루트에 `CNAME` 파일(내용 한 줄: `recipe.eliteaja.com`)을
+   올리고 푸시합니다. Settings → Pages 의 Custom domain 이 자동으로 채워집니다.
+
+4. **Enforce HTTPS** 체크. 인증서 발급에 몇 분에서 한 시간쯤 걸립니다.
+
+도메인을 붙이면 주소가 `/foodtest/` 하위가 아니라 루트가 되므로 경로가 더 단순해집니다.
+앱의 모든 경로가 상대 경로라 코드 수정은 필요 없습니다.
 
 ## 파일
 
