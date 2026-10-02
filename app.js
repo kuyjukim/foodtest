@@ -426,9 +426,42 @@
 
   // Open API 로 미리 만들어 둔 딥링크 (tools/gen-coupang-links.js 가 생성)
   var DEEPLINKS = window.COUPANG_LINKS || {};
-  // 재료별 실제 상품 (tools/gen-coupang-products.js 가 생성)
+  /* 재료별 실제 상품 (tools/gen-coupang-products.js 가 생성).
+   * 65KB 로 가장 큰 파일인데 레시피 상세를 열어야 쓰인다.
+   * 첫 화면을 막지 않도록 상세를 처음 열 때 받아 온다.
+   * 받아오기 전에는 링크 칩만 보여주고, 도착하면 그 자리만 다시 그린다. */
   var PRODUCTS = window.COUPANG_PRODUCTS || {};
   var PRODUCTS_ASOF = window.COUPANG_PRODUCTS_ASOF || '';
+  var productState = Object.keys(PRODUCTS).length ? 'ready' : 'idle';
+  var productWaiting = [];
+
+  function loadProducts(done) {
+    if (productState === 'ready' || productState === 'failed') return done();
+    productWaiting.push(done);
+    if (productState === 'loading') return;
+
+    productState = 'loading';
+    var el = document.createElement('script');
+    el.src = 'data/coupang-products.js';
+    el.onload = function () {
+      PRODUCTS = window.COUPANG_PRODUCTS || {};
+      PRODUCTS_ASOF = window.COUPANG_PRODUCTS_ASOF || '';
+      productState = 'ready';
+      flushProductWaiters();
+    };
+    el.onerror = function () {
+      // 못 받아도 링크 칩으로는 장을 볼 수 있다
+      productState = 'failed';
+      flushProductWaiters();
+    };
+    document.head.appendChild(el);
+  }
+
+  function flushProductWaiters() {
+    var list = productWaiting;
+    productWaiting = [];
+    list.forEach(function (fn) { fn(); });
+  }
 
   // 제휴 관계가 실제로 있는 상태인가. 셋 중 하나라도 있어야 참.
   function isAffiliate() {
@@ -490,6 +523,25 @@
     return cards;
   }
 
+  /* 상세를 열 때마다 호출된다. 상품 데이터가 아직 없으면 칩만 먼저 그리고,
+   * 도착하면 같은 자리를 다시 그린다. 그 사이 다른 레시피로 옮겨갔다면 버린다. */
+  function renderShop(m) {
+    var slot = document.getElementById('shopSlot');
+    if (!slot) return;
+    slot.innerHTML = shopSection(m);
+
+    if (productState === 'ready' || productState === 'failed') return;
+    if (!AFF.enabled || !m.missEss.length) return;
+
+    var token = m.recipe.id;
+    loadProducts(function () {
+      var again = document.getElementById('shopSlot');
+      if (!again || el.modal.hidden) return;
+      if (shownRecipeId !== token) return;
+      again.innerHTML = shopSection(m);
+    });
+  }
+
   function shopSection(m) {
     if (!AFF.enabled || (!m.missEss.length && !m.missOpt.length)) return '';
 
@@ -532,6 +584,7 @@
 
   var lastFocused = null;
   var openFamily = null;
+  var shownRecipeId = null;
 
   function openModal(family, recipeId) {
     lastFocused = document.activeElement;
@@ -548,6 +601,7 @@
     var variants = (familyIndex[family] || []).map(function (r) { return evaluate(r, pantry); });
     var cur = variants.filter(function (m) { return m.recipe.id === recipeId; })[0] || variants[0];
     var r = cur.recipe;
+    shownRecipeId = r.id;
 
     el.modalTitle.textContent = variants.length > 1 ? family : r.name;
 
@@ -605,9 +659,10 @@
       r.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>';
     if (r.tip) html += '<p class="tip">💡 ' + esc(r.tip) + '</p>';
 
-    html += shopSection(cur);
+    html += '<div id="shopSlot"></div>';
 
     el.modalBody.innerHTML = html;
+    renderShop(cur);
     el.modalBody.scrollTop = 0;
   }
 
