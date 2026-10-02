@@ -397,6 +397,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://recipe.eliteaja.com/recipe/ramyeon-gyeran.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://recipe.eliteaja.com/recipe/ramyeon-kimchi.html</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>

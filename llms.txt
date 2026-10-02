@@ -1,7 +1,7 @@
 # 오늘 뭐 먹지?
 
 > 집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아주는 한국어 레시피 사이트.
-> 레시피 125개(요리 76종). https://recipe.eliteaja.com/
+> 레시피 126개(요리 76종). https://recipe.eliteaja.com/
 
 ## 이 사이트가 하는 일
 
@@ -78,6 +78,7 @@
 - [궁중떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-gungjung.html): 한식·간식·분식, 조리 25분, 2인분. 필수 재료 떡·간장·설탕. 선택 재료 소고기·당근·양파·버섯·피망·대파.
 - [로제떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-rose.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·고추장·우유. 선택 재료 생크림·어묵·소시지·베이컨·양파·대파.
 - [짜장떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-jajang.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·춘장. 선택 재료 양파·양배추·어묵·대파·돼지고기·설탕.
+- [계란 라면](https://recipe.eliteaja.com/recipe/ramyeon-gyeran.html): 분식·간식·분식, 조리 8분, 1인분. 필수 재료 라면·계란. 선택 재료 대파·김치·치즈·콩나물·후추.
 - [김치 라면](https://recipe.eliteaja.com/recipe/ramyeon-kimchi.html): 분식·간식·분식, 조리 10분, 1인분. 필수 재료 라면·김치. 선택 재료 계란·대파·치즈·스팸·두부·콩나물.
 - [치즈 라면](https://recipe.eliteaja.com/recipe/ramyeon-cheese.html): 분식·간식·분식, 조리 8분, 1인분. 필수 재료 라면·치즈. 선택 재료 계란·대파·우유·후추·김치.
 - [떡만두 라면](https://recipe.eliteaja.com/recipe/ramyeon-tteok.html): 분식·간식·분식, 조리 12분, 1인분. 필수 재료 라면·떡. 선택 재료 만두·계란·대파·김·치즈·콩나물.

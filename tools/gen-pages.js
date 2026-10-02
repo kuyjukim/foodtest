@@ -2,7 +2,7 @@
 /* 레시피마다 진짜 HTML 페이지를 만든다.
  *
  * 왜 필요한가:
- *   앱은 한 페이지짜리라 125개 레시피가 전부 같은 주소다. 그래서
+ *   앱은 한 페이지짜리라 레시피가 모두 전부 같은 주소다. 그래서
  *   - 카카오톡·페북 크롤러는 자바스크립트를 실행하지 않으므로 레시피별 미리보기가 안 뜨고
  *   - 검색엔진에 '김치찌개' 로 걸릴 페이지 자체가 없고
  *   - 블로그에서 특정 레시피를 링크할 수도 없다.
@@ -203,7 +203,7 @@ function footContent() {
 
 /* 레시피 전체 목록 페이지.
  * 첫 화면은 자바스크립트 앱이라 크롤러가 읽을 글자가 거의 없다.
- * 레시피 125개로 들어가는 길을 HTML 로 열어 준다. */
+ * 레시피 전체로 들어가는 길을 HTML 로 열어 준다. */
 function indexPage() {
   const byKind = {};
   RECIPES.forEach(r => (byKind[r.kind] = byKind[r.kind] || []).push(r));
@@ -387,7 +387,7 @@ if (indexHtml.includes(MARK_A)) {
     fs.writeFileSync(INDEX, b2 + '\n' + footContent() + '\n  ' + a2);
     console.log('첫 화면 설명·링크: 넣음');
   }
-  console.log('측정 태그:', analyticsTag() ? '넣음 (index + 레시피 125개)' : '설정값 없음');
+  console.log('측정 태그:', analyticsTag() ? '넣음 (index + 레시피 ${RECIPES.length}개)' : '설정값 없음');
 }
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);

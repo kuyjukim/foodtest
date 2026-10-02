@@ -902,6 +902,20 @@ window.RECIPES = [
     tip: '춘장을 기름에 먼저 볶는 과정을 빼면 쓴맛이 남습니다.'
   },
   {
+    id: 'ramyeon-gyeran', family: '라면', label: '계란', name: '계란 라면', category: '분식', kind: '간식·분식',
+    time: 8, difficulty: '쉬움', servings: 1, veg: false,
+    essential: ['라면', '계란'],
+    optional: ['대파', '김치', '치즈', '콩나물', '후추'],
+    steps: [
+      '물 500ml를 끓인다. 국물을 진하게 하려면 450ml.',
+      '끓으면 스프와 면을 넣고 3분 끓인다.',
+      '대파를 넣고 계란을 깨 넣는다.',
+      '노른자를 풀고 싶으면 바로 젓고, 반숙으로 두려면 30초 건드리지 않는다.',
+      '불을 끄고 후추를 뿌린다.'
+    ],
+    tip: '계란을 넣으면 국물 온도가 떨어집니다. 면이 다 익은 뒤 마지막에 넣으세요.'
+  },
+  {
     id: 'ramyeon-kimchi', family: '라면', label: '김치', name: '김치 라면', category: '분식', kind: '간식·분식',
     time: 10, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['라면', '김치'],
