@@ -1,6 +1,6 @@
 /* 오프라인에서도 열리도록 앱 파일을 캐시해 둔다.
  * 파일을 고친 뒤에는 CACHE 이름의 숫자를 올려야 사용자에게 새 버전이 전달된다. */
-var CACHE = 'fridge-recipe-v9';
+var CACHE = 'fridge-recipe-v10';
 
 var SHELL = [
   '.',
