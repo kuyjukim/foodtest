@@ -118,7 +118,7 @@ window.RECIPES = [
     tip: '떡을 미리 불려두면 국물이 덜 걸쭉해지고 떡도 더 부드럽습니다.'
   },
   {
-    id: 'dakbokkeumtang', name: '닭볶음탕', category: '한식', kind: '국·찌개',
+    id: 'dakbokkeumtang', defining: ['닭고기'], name: '닭볶음탕', category: '한식', kind: '국·찌개',
     time: 45, difficulty: '보통', servings: 3, veg: false,
     essential: ['닭고기', '감자', '고춧가루', '간장'],
     optional: ['양파', '당근', '대파', '청양고추', '고추장', '다진마늘', '설탕', '후추', '생강'],
@@ -132,7 +132,7 @@ window.RECIPES = [
     tip: '감자는 큼직하게 썰어야 조리는 동안 부서지지 않습니다.'
   },
   {
-    id: 'jeyuk-bokkeum', family: '제육볶음', label: '고추장', name: '제육볶음', category: '한식', kind: '볶음·구이',
+    id: 'jeyuk-bokkeum', defining: ['돼지고기'], family: '제육볶음', label: '고추장', name: '제육볶음', category: '한식', kind: '볶음·구이',
     time: 25, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['돼지고기', '고추장', '고춧가루'],
     optional: ['양파', '대파', '당근', '양배추', '청양고추', '간장', '설탕', '다진마늘', '참기름', '후추', '물엿'],
@@ -146,7 +146,7 @@ window.RECIPES = [
     tip: '고기를 한 번에 다 넣으면 물이 생겨 삶아집니다. 팬이 좁으면 두 번에 나눠 볶으세요.'
   },
   {
-    id: 'bulgogi', name: '소불고기', category: '한식', kind: '볶음·구이',
+    id: 'bulgogi', defining: ['소고기'], name: '소불고기', category: '한식', kind: '볶음·구이',
     time: 30, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['소고기', '간장', '설탕'],
     optional: ['양파', '대파', '당근', '버섯', '배', '다진마늘', '참기름', '후추', '깨'],
@@ -748,7 +748,7 @@ window.RECIPES = [
     tip: '고기 없이도 들기름을 넉넉히 쓰면 국물이 깊어집니다. 오래 볶을수록 맛있어요.'
   },
   {
-    id: 'doenjang-jjigae-beef', family: '된장찌개', label: '차돌', name: '차돌 된장찌개', category: '한식', kind: '국·찌개',
+    id: 'doenjang-jjigae-beef', defining: ['소고기'], family: '된장찌개', label: '차돌', name: '차돌 된장찌개', category: '한식', kind: '국·찌개',
     time: 25, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['된장', '소고기'],
     optional: ['두부', '애호박', '양파', '버섯', '대파', '청양고추', '다진마늘', '고춧가루'],
@@ -1042,7 +1042,7 @@ window.RECIPES = [
     tip: '한 번에 오래 돌리면 터집니다. 중간에 한 번 젓는 게 핵심입니다.'
   },
   {
-    id: 'yukgaejang', name: '육개장', category: '한식', kind: '국·찌개',
+    id: 'yukgaejang', defining: ['소고기'], name: '육개장', category: '한식', kind: '국·찌개',
     time: 60, difficulty: '보통', servings: 3, veg: false,
     essential: ['소고기', '대파', '고춧가루'],
     optional: ['고사리', '숙주', '토란대', '다진마늘', '간장', '참기름', '계란', '양파'],
@@ -1070,7 +1070,7 @@ window.RECIPES = [
     tip: '어묵을 끓는 물에 한 번 데쳐 넣으면 국물에 기름이 뜨지 않습니다.'
   },
   {
-    id: 'bugeo-guk', name: '북엇국', category: '한식', kind: '국·찌개',
+    id: 'bugeo-guk', defining: ['북어'], name: '북엇국', category: '한식', kind: '국·찌개',
     time: 25, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['북어'],
     optional: ['계란', '두부', '대파', '무', '다진마늘', '참기름', '간장', '다시마'],
@@ -1140,7 +1140,7 @@ window.RECIPES = [
     tip: '반죽을 냉장고에서 쉬게 하는 30분이 쫄깃함을 만듭니다. 생략하면 퍽퍽해져요.'
   },
   {
-    id: 'samgyetang', name: '삼계탕', category: '한식', kind: '국·찌개',
+    id: 'samgyetang', defining: ['닭고기'], name: '삼계탕', category: '한식', kind: '국·찌개',
     time: 70, difficulty: '보통', servings: 2, veg: false,
     essential: ['닭고기', '찹쌀'],
     optional: ['대추', '수삼', '마늘', '대파', '밤', '소금', '후추'],
@@ -1238,7 +1238,7 @@ window.RECIPES = [
     tip: '고기를 오래 끓이면 질겨집니다. 색이 변하면 바로 불을 끄세요.'
   },
   {
-    id: 'chicken-mayo-bap', family: '덮밥', label: '치킨마요', name: '치킨마요덮밥', category: '일식', kind: '밥·면',
+    id: 'chicken-mayo-bap', defining: ['닭고기'], family: '덮밥', label: '치킨마요', name: '치킨마요덮밥', category: '일식', kind: '밥·면',
     time: 25, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['밥', '닭고기', '마요네즈'],
     optional: ['계란', '간장', '설탕', '맛술', '감자전분', '김', '깨', '양파', '스리라차'],
@@ -1252,7 +1252,7 @@ window.RECIPES = [
     tip: '전분을 묻혀 구우면 튀기지 않아도 바삭합니다.'
   },
   {
-    id: 'jeyuk-deopbap', family: '덮밥', label: '제육', name: '제육덮밥', category: '한식', kind: '밥·면',
+    id: 'jeyuk-deopbap', defining: ['돼지고기'], family: '덮밥', label: '제육', name: '제육덮밥', category: '한식', kind: '밥·면',
     time: 25, difficulty: '쉬움', servings: 1, veg: false,
     essential: ['밥', '돼지고기', '고추장'],
     optional: ['양파', '대파', '양배추', '당근', '계란', '고춧가루', '간장', '설탕', '다진마늘', '참기름', '상추'],
@@ -1280,7 +1280,7 @@ window.RECIPES = [
     tip: '밥을 기름에 먼저 볶으면 퍼지지 않고 알갱이가 살아 있습니다.'
   },
   {
-    id: 'dak-juk', family: '죽', label: '닭', name: '닭죽', category: '한식', kind: '밥·면',
+    id: 'dak-juk', defining: ['닭고기'], family: '죽', label: '닭', name: '닭죽', category: '한식', kind: '밥·면',
     time: 50, difficulty: '보통', servings: 2, veg: false,
     essential: ['닭고기', '밥'],
     optional: ['찹쌀', '당근', '양파', '대파', '마늘', '참기름', '소금', '후추', '깨'],
@@ -1406,7 +1406,7 @@ window.RECIPES = [
     tip: '재료를 따로 볶는 게 번거로워도 색과 식감이 살아납니다. 당면은 뜨거울 때 양념해야 잘 뱁니다.'
   },
   {
-    id: 'dakgalbi', name: '닭갈비', category: '한식', kind: '볶음·구이',
+    id: 'dakgalbi', defining: ['닭고기'], name: '닭갈비', category: '한식', kind: '볶음·구이',
     time: 40, difficulty: '보통', servings: 3, veg: false,
     essential: ['닭고기', '고추장', '고춧가루'],
     optional: ['양배추', '고구마', '떡', '깻잎', '양파', '대파', '간장', '설탕', '다진마늘', '카레가루', '치즈', '밥'],
@@ -1434,7 +1434,7 @@ window.RECIPES = [
     tip: '쭈꾸미는 오래 볶으면 질겨지고 물이 많이 나옵니다. 4분 안에 끝내세요.'
   },
   {
-    id: 'chadol-sukju', name: '차돌 숙주볶음', category: '한식', kind: '볶음·구이',
+    id: 'chadol-sukju', defining: ['소고기'], name: '차돌 숙주볶음', category: '한식', kind: '볶음·구이',
     time: 15, difficulty: '쉬움', servings: 2, veg: false,
     essential: ['소고기', '숙주'],
     optional: ['대파', '양파', '부추', '굴소스', '간장', '다진마늘', '참기름', '후추', '깨', '청양고추'],
@@ -1476,7 +1476,7 @@ window.RECIPES = [
     tip: '팬이 충분히 달궈지기 전에 올리면 껍질이 들러붙어 다 찢어집니다.'
   },
   {
-    id: 'donkatsu', name: '돈까스', category: '일식', kind: '볶음·구이',
+    id: 'donkatsu', defining: ['돼지고기'], name: '돈까스', category: '일식', kind: '볶음·구이',
     time: 35, difficulty: '보통', servings: 2, veg: false,
     essential: ['돼지고기', '빵가루', '계란', '밀가루'],
     optional: ['양배추', '돈까스소스', '케찹', '간장', '설탕', '후추', '소금', '우스터소스'],
@@ -1518,7 +1518,7 @@ window.RECIPES = [
     tip: '소를 두껍게 넣으면 속이 안 익습니다. 얇게 펴 바르세요.'
   },
   {
-    id: 'jjimdak', name: '찜닭', category: '한식', kind: '국·찌개',
+    id: 'jjimdak', defining: ['닭고기'], name: '찜닭', category: '한식', kind: '국·찌개',
     time: 45, difficulty: '보통', servings: 3, veg: false,
     essential: ['닭고기', '간장', '당면'],
     optional: ['감자', '당근', '양파', '대파', '청양고추', '페페론치노', '설탕', '다진마늘', '물엿', '후추', '참기름', '깨'],

@@ -113,9 +113,35 @@
     return false;
   }
 
+  /* 요리 이름에 들어간 재료는 그 요리를 그 요리이게 하는 재료다.
+   * '오징어볶음에 오징어 대신 새우' 는 대체가 아니라 다른 요리다.
+   * 참치캔→참치, 냉면사리→냉면 처럼 꼬리말이 붙은 이름도 같이 본다. */
+  var NAME_TAILS = ['통조림', '캔', '사리'];
+
+  function definesDish(recipe, need) {
+    // 이름만으로는 안 드러나는 경우 (삼계탕의 닭, 육개장의 소)
+    if (recipe.defining && recipe.defining.indexOf(need) !== -1) return true;
+
+    var title = (recipe.name + (recipe.family || '')).replace(/\s/g, '');
+    if (title.indexOf(need) !== -1) return true;
+
+    for (var i = 0; i < NAME_TAILS.length; i++) {
+      var tail = NAME_TAILS[i];
+      if (need.length > tail.length && need.slice(-tail.length) === tail) {
+        var base = need.slice(0, -tail.length);
+        if (base.length >= 2 && title.indexOf(base) !== -1) return true;
+      }
+    }
+    // 칼국수면 → 칼국수 처럼 '면' 만 떼는 경우 (소면·중화면처럼 짧은 건 제외)
+    if (need.slice(-1) === '면' && need.length >= 4 && title.indexOf(need.slice(0, -1)) !== -1) return true;
+    return false;
+  }
+
   // 없을 때 대신 쓸 수 있는 재료 목록
   function swapOptions(recipe, need) {
-    var list = (recipe.swaps && recipe.swaps[need]) || SWAPS[need] || [];
+    if (definesDish(recipe, need)) return [];
+    var own = recipe.swaps && Object.prototype.hasOwnProperty.call(recipe.swaps, need);
+    var list = own ? recipe.swaps[need] : (SWAPS[need] || []);
     return list.map(function (o) {
       return { use: [].concat(o.use), note: o.note || '' };
     });
