@@ -9,6 +9,7 @@
   var STAPLES = window.PANTRY_STAPLES || [];
   var CATEGORIES = window.INGREDIENT_CATEGORIES || [];
   var AFF = window.AFFILIATE || {};
+  var ANALYTICS = window.ANALYTICS || {};
 
   var LS = { pantry: 'fridge.pantry', staples: 'fridge.staples', theme: 'fridge.theme' };
 
@@ -422,6 +423,43 @@
   }
 
 
+
+  /* ── 측정 ─────────────────────────────────────
+   * 설정이 비어 있으면 스크립트를 아예 불러오지 않는다.
+   * 측정 도구가 없거나 차단당해도 앱 동작에는 영향이 없어야 한다. */
+
+  function analyticsOn() {
+    return !!(ANALYTICS.cloudflareToken || ANALYTICS.ga4Id);
+  }
+
+  function initAnalytics() {
+    if (ANALYTICS.cloudflareToken) {
+      var cf = document.createElement('script');
+      cf.defer = true;
+      cf.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      cf.setAttribute('data-cf-beacon', JSON.stringify({ token: ANALYTICS.cloudflareToken }));
+      document.head.appendChild(cf);
+    }
+
+    if (ANALYTICS.ga4Id) {
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ANALYTICS.ga4Id);
+      document.head.appendChild(ga);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', ANALYTICS.ga4Id);
+    }
+  }
+
+  function track(name, params) {
+    if (ANALYTICS.debug) console.log('[측정]', name, params || {});
+    if (!ANALYTICS.ga4Id || typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch (e) { /* 측정 실패가 앱을 막지 않는다 */ }
+  }
+
   /* ── 장보기 (쿠팡 파트너스) ───────────────────── */
 
   // Open API 로 미리 만들어 둔 딥링크 (tools/gen-coupang-links.js 가 생성)
@@ -606,6 +644,10 @@
     var r = cur.recipe;
     shownRecipeId = r.id;
     pushRecipeUrl(r.id);
+    track('recipe_open', {
+      recipe_id: r.id, recipe_name: r.name, family: familyOf(r),
+      status: cur.status, missing: cur.missEss.length
+    });
 
     el.modalTitle.textContent = variants.length > 1 ? family : r.name;
 
@@ -845,7 +887,19 @@
   el.vegOnly.addEventListener('change', function () { state.vegOnly = el.vegOnly.checked; renderResults(); });
 
   el.modal.addEventListener('click', function (e) {
-    if (e.target.hasAttribute('data-close')) closeModal();
+    if (e.target.hasAttribute('data-close')) return closeModal();
+
+    // 쿠팡으로 나가는 클릭. 수익과 직결되는 숫자라 따로 센다.
+    var link = e.target.closest && e.target.closest('a.shop-chip.link, a.prod');
+    if (link) {
+      var href = link.getAttribute('href') || '';
+      track('shop_click', {
+        ingredient: link.dataset.ing || '',
+        link_type: link.classList.contains('prod') ? 'product'
+                 : href.indexOf('link.coupang.com') !== -1 ? 'deeplink' : 'search',
+        recipe_id: shownRecipeId || ''
+      });
+    }
   });
 
   window.addEventListener('popstate', function (e) {
@@ -882,6 +936,7 @@
   window.addEventListener('appinstalled', function () {
     installEvent = null;
     el.installBtn.hidden = true;
+    track('app_install');
   });
 
   el.installBtn.addEventListener('click', function () {
@@ -926,6 +981,8 @@
       el.disclosure.textContent = AFF.disclosure;
       el.disclosure.hidden = false;
     }
+
+    if (analyticsOn()) initAnalytics();
 
     renderQuickPick();
     renderStaples();
