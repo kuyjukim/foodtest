@@ -287,7 +287,19 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 그 주소를 공유하면 해당 레시피가 열린 채로 뜨고, 뒤로가기로 닫힙니다.
 정적 페이지의 '내 재료로 만들 수 있는지 보기' 도 이 주소로 들어옵니다.
 
-아직 안 한 것: **레시피별 공유 이미지**(지금은 125개가 같은 `og.png` 를 씁니다).
+**레시피별 공유 이미지** — `tools/gen-og-images.js` 가 레시피마다 이름·조리시간·재료가
+담긴 카드를 뽑습니다(`og/<id>.png`, 장당 약 30KB). 카카오톡에 감자탕을 공유하면
+감자탕 카드가 뜹니다.
+
+매 배포마다 돌리기엔 느려서 **레시피가 바뀌었을 때만 손으로** 돌립니다.
+
+```bash
+node tools/gen-og-images.js          # 전부
+node tools/gen-og-images.js japchae  # 하나만, 모양 확인용
+```
+
+이미지가 없는 레시피는 기본 `og.png` 로 자동으로 넘어가므로, 중간에 멈춰도
+페이지가 깨지지 않습니다.
 
 ## 측정
 
@@ -338,7 +350,9 @@ tools/coupang-api.js      쿠팡 API 서명·호출 공용 모듈
 tools/gen-coupang-*.js    딥링크 / 상품 생성 스크립트
 tools/gen-pages.js        레시피별 정적 페이지·sitemap 생성 (배포 때 자동 실행)
 recipe/                   생성된 레시피 페이지 (자동 생성)
-og.png                    공유 미리보기 이미지
+og.png                    기본 공유 이미지
+og/                       레시피별 공유 이미지 125장 (자동 생성)
+tools/gen-og-images.js    공유 이미지 생성
 sitemap.xml / robots.txt  검색엔진용 (자동 생성)
 ```
 

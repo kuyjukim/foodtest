@@ -60,6 +60,13 @@ const esc = s => String(s).replace(/[&<>"']/g, c =>
 
 const famOf = r => r.family || r.name;
 
+/* 레시피별 공유 이미지. 아직 안 만든 레시피는 기본 이미지로 넘어간다.
+ * (tools/gen-og-images.js 가 만들고, 중간에 멈춰도 페이지는 깨지지 않는다) */
+function shareImage(r) {
+  const own = path.join(ROOT, 'og', r.id + '.png');
+  return fs.existsSync(own) ? `${BASE}/og/${r.id}.png` : `${BASE}/og.png`;
+}
+
 /* 조리시간을 ISO 8601 로 (구조화 데이터 요구 형식) */
 const iso = min => 'PT' + min + 'M';
 
@@ -69,7 +76,7 @@ function jsonLd(r) {
     '@type': 'Recipe',
     name: r.name,
     description: `${r.name} 만드는 법. 필수 재료 ${r.essential.join(', ')}. 조리 ${r.time}분, ${r.servings}인분.`,
-    image: [BASE + '/og.png'],
+    image: [shareImage(r)],
     author: { '@type': 'Organization', name: '오늘 뭐 먹지?', url: BASE + '/' },
     recipeCategory: r.kind,
     recipeCuisine: r.category,
@@ -108,7 +115,9 @@ ${analyticsTag()}
 <meta property="og:site_name" content="오늘 뭐 먹지?">
 <meta property="og:title" content="${esc(r.name)} 레시피">
 <meta property="og:description" content="${esc(`필수 재료 ${r.essential.join(', ')} · 조리 ${r.time}분 · ${r.difficulty}`)}">
-<meta property="og:image" content="${BASE}/og.png">
+<meta property="og:image" content="${shareImage(r)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="${url}">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
@@ -221,5 +230,7 @@ if (indexHtml.includes(MARK_A)) {
 }
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);
+const own = RECIPES.filter(r => fs.existsSync(path.join(ROOT, 'og', r.id + '.png'))).length;
+console.log(`공유 이미지: 레시피별 ${own}개 / 기본 이미지 ${RECIPES.length - own}개`);
 console.log(`sitemap.xml (${urls.length}개 주소), robots.txt 생성`);
 console.log(`사이트 주소: ${BASE}`);
