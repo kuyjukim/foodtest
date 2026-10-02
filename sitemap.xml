@@ -121,6 +121,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://recipe.eliteaja.com/recipe/tomato-gyeran.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://recipe.eliteaja.com/recipe/mushroom-bokkeum.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://recipe.eliteaja.com/recipe/cabbage-bokkeum.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://recipe.eliteaja.com/recipe/shrimp-garlic.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://recipe.eliteaja.com/recipe/sigeumchi-namul.html</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -374,6 +398,12 @@
   </url>
   <url>
     <loc>https://recipe.eliteaja.com/recipe/ganjang-butter-pasta.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://recipe.eliteaja.com/recipe/pasta-bacon.html</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

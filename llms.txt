@@ -1,7 +1,7 @@
 # 오늘 뭐 먹지?
 
 > 집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아주는 한국어 레시피 사이트.
-> 레시피 126개(요리 76종). https://recipe.eliteaja.com/
+> 레시피 131개(요리 80종). https://recipe.eliteaja.com/
 
 ## 이 사이트가 하는 일
 
@@ -32,6 +32,10 @@
 - [감자조림](https://recipe.eliteaja.com/recipe/gamja-jorim.html): 한식·반찬, 조리 25분, 3인분. 필수 재료 감자·간장. 선택 재료 양파·당근·꽈리고추·설탕·물엿·다진마늘.
 - [애호박볶음](https://recipe.eliteaja.com/recipe/aehobak-bokkeum.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 애호박. 선택 재료 양파·새우젓·다진마늘·대파·참기름·깨.
 - [콩나물무침](https://recipe.eliteaja.com/recipe/kongnamul-muchim.html): 한식·반찬, 조리 15분, 3인분. 필수 재료 콩나물. 선택 재료 대파·다진마늘·참기름·깨·고춧가루·소금.
+- [토마토 계란볶음](https://recipe.eliteaja.com/recipe/tomato-gyeran.html): 중식·반찬, 조리 10분, 2인분. 필수 재료 토마토·계란. 선택 재료 대파·설탕·굴소스·참기름·후추·다진마늘.
+- [버섯볶음](https://recipe.eliteaja.com/recipe/mushroom-bokkeum.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 버섯. 선택 재료 양파·대파·다진마늘·간장·참기름·깨.
+- [양배추볶음](https://recipe.eliteaja.com/recipe/cabbage-bokkeum.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 양배추. 선택 재료 양파·당근·대파·다진마늘·간장·참기름.
+- [마늘 새우볶음](https://recipe.eliteaja.com/recipe/shrimp-garlic.html): 양식·반찬, 조리 15분, 2인분. 필수 재료 새우. 선택 재료 마늘·양파·버터·올리브오일·페페론치노·파슬리.
 - [시금치나물](https://recipe.eliteaja.com/recipe/sigeumchi-namul.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 시금치. 선택 재료 다진마늘·간장·참기름·깨·대파.
 - [멸치볶음](https://recipe.eliteaja.com/recipe/myeolchi-bokkeum.html): 한식·반찬, 조리 15분, 4인분. 필수 재료 멸치·간장. 선택 재료 꽈리고추·아몬드·호두·물엿·설탕·다진마늘.
 - [어묵볶음](https://recipe.eliteaja.com/recipe/eomuk-bokkeum.html): 한식·반찬, 조리 15분, 3인분. 필수 재료 어묵·간장. 선택 재료 양파·당근·대파·피망·설탕·다진마늘.
@@ -75,6 +79,7 @@
 - [베이컨 마늘볶음밥](https://recipe.eliteaja.com/recipe/bokkeumbap-garlic.html): 양식·밥·면, 조리 15분, 1인분. 필수 재료 밥·베이컨·마늘. 선택 재료 버터·간장·후추·파슬리·계란·양파.
 - [로제 파스타](https://recipe.eliteaja.com/recipe/rose-pasta.html): 양식·밥·면, 조리 25분, 2인분. 필수 재료 스파게티면·토마토소스·우유. 선택 재료 생크림·베이컨·양파·마늘·버터·파마산치즈.
 - [간장버터 파스타](https://recipe.eliteaja.com/recipe/ganjang-butter-pasta.html): 양식·밥·면, 조리 15분, 1인분. 필수 재료 스파게티면·간장·버터. 선택 재료 마늘·대파·베이컨·계란·김·후추.
+- [베이컨 마늘 파스타](https://recipe.eliteaja.com/recipe/pasta-bacon.html): 양식·밥·면, 조리 18분, 1인분. 필수 재료 스파게티면·베이컨. 선택 재료 마늘·양파·파마산치즈·후추·파슬리·페페론치노.
 - [궁중떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-gungjung.html): 한식·간식·분식, 조리 25분, 2인분. 필수 재료 떡·간장·설탕. 선택 재료 소고기·당근·양파·버섯·피망·대파.
 - [로제떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-rose.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·고추장·우유. 선택 재료 생크림·어묵·소시지·베이컨·양파·대파.
 - [짜장떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-jajang.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·춘장. 선택 재료 양파·양배추·어묵·대파·돼지고기·설탕.

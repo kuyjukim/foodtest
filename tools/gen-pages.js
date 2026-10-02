@@ -387,7 +387,7 @@ if (indexHtml.includes(MARK_A)) {
     fs.writeFileSync(INDEX, b2 + '\n' + footContent() + '\n  ' + a2);
     console.log('첫 화면 설명·링크: 넣음');
   }
-  console.log('측정 태그:', analyticsTag() ? '넣음 (index + 레시피 ${RECIPES.length}개)' : '설정값 없음');
+  console.log('측정 태그:', analyticsTag() ? `넣음 (index + 레시피 ${RECIPES.length}개)` : '설정값 없음');
 }
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);
