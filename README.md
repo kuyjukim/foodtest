@@ -257,6 +257,24 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
   조리시간은 ISO 8601(`PT25M`), 인분·재료·단계·분류를 담습니다.
 - **OG 태그** — 카카오톡·페이스북에 공유하면 제목·설명·이미지가 뜹니다 (`og.png`).
 - **sitemap.xml / robots.txt** — 126개 주소를 색인하도록 안내합니다.
+  robots 에는 네이버(Yeti)·구글·다음 크롤러를 따로 허용해 두었습니다.
+
+### 검색엔진에 사이트 등록
+
+소유확인 코드는 `site-verify.json` 에 넣습니다. 비어 있으면 태그를 넣지 않습니다.
+
+```json
+{ "naver": "발급받은코드", "google": "발급받은코드" }
+```
+
+값을 채우고 푸시하면 배포할 때 `index.html` 과 레시피 페이지 125개에 자동으로 박힙니다.
+(크롤러는 자바스크립트를 실행하지 않으므로 HTML 에 직접 들어가야 합니다)
+
+- **네이버** — searchadvisor.naver.com → 웹마스터도구 → 사이트 등록 →
+  HTML 태그 방식의 `content` 값. 확인 후 **요청 → 사이트맵 제출** 에
+  `https://recipe.eliteaja.com/sitemap.xml` 을 넣습니다.
+- **구글** — search.google.com/search-console → 속성 추가 → HTML 태그 방식.
+  확인 후 Sitemaps 에 같은 주소를 제출합니다.
 
 **레시피별 주소** — 앱에서 레시피를 열면 주소가 `?r=kimchi-jjigae` 로 바뀝니다.
 그 주소를 공유하면 해당 레시피가 열린 채로 뜨고, 뒤로가기로 닫힙니다.

@@ -27,6 +27,18 @@ global.window = {};
 require('../data/recipes.js');
 const RECIPES = global.window.RECIPES;
 
+/* 검색엔진 소유확인 태그. site-verify.json 에 값이 있을 때만 넣는다.
+ * 크롤러는 자바스크립트를 실행하지 않으므로 HTML 에 직접 박아야 한다. */
+function verifyTags() {
+  let cfg = {};
+  try { cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'site-verify.json'), 'utf8')); }
+  catch (e) { return ''; }
+  const tags = [];
+  if (cfg.naver)  tags.push(`<meta name="naver-site-verification" content="${esc(cfg.naver)}">`);
+  if (cfg.google) tags.push(`<meta name="google-site-verification" content="${esc(cfg.google)}">`);
+  return tags.join('\n');
+}
+
 const esc = s => String(s).replace(/[&<>"']/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -73,6 +85,7 @@ function page(r) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${url}">
+${verifyTags()}
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="오늘 뭐 먹지?">
@@ -161,8 +174,33 @@ fs.writeFileSync(path.join(ROOT, 'robots.txt'),
 `User-agent: *
 Allow: /
 
+# 네이버 크롤러
+User-agent: Yeti
+Allow: /
+
+# 구글
+User-agent: Googlebot
+Allow: /
+
+# 다음
+User-agent: daum
+Allow: /
+
 Sitemap: ${BASE}/sitemap.xml
 `);
+
+// index.html 의 표식 자리에 소유확인 태그를 넣는다
+const INDEX = path.join(ROOT, 'index.html');
+let indexHtml = fs.readFileSync(INDEX, 'utf8');
+const MARK_A = '<!-- site-verification:start -->';
+const MARK_B = '<!-- site-verification:end -->';
+if (indexHtml.includes(MARK_A)) {
+  const before = indexHtml.slice(0, indexHtml.indexOf(MARK_A) + MARK_A.length);
+  const after = indexHtml.slice(indexHtml.indexOf(MARK_B));
+  const tags = verifyTags();
+  fs.writeFileSync(INDEX, before + (tags ? '\n' + tags + '\n' : '\n') + after);
+  console.log('소유확인 태그:', tags ? tags.replace(/\n/g, ' / ') : '(설정값 없음 — 넣지 않음)');
+}
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);
 console.log(`sitemap.xml (${urls.length}개 주소), robots.txt 생성`);
