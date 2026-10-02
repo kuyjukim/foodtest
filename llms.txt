@@ -1,0 +1,146 @@
+# 오늘 뭐 먹지?
+
+> 집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아주는 한국어 레시피 사이트.
+> 레시피 125개(요리 76종). https://recipe.eliteaja.com/
+
+## 이 사이트가 하는 일
+
+- 가진 재료를 넣으면 그것으로 만들 수 있는 요리만 보여준다.
+- 없는 재료는 무엇으로 대신할 수 있는지 알려준다.
+  예: 고추장이 없으면 고춧가루 2 : 된장 1 : 설탕 1 로 대신한다.
+  단, 요리 이름에 들어간 재료(오징어볶음의 오징어)는 대체하지 않는다.
+- 같은 요리의 여러 버전을 가지고 있다. 김치찌개는 돼지고기·참치·스팸·꽁치·들기름 5종.
+- 소금·설탕·간장 등 기본 양념 15가지는 집에 있다고 가정하며, 사용자가 끌 수 있다.
+
+## 레시피 목록
+
+- [돼지고기 김치찌개](https://recipe.eliteaja.com/recipe/kimchi-jjigae.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 김치·돼지고기·고춧가루. 선택 재료 두부·양파·대파·다진마늘·설탕·간장.
+- [채소 된장찌개](https://recipe.eliteaja.com/recipe/doenjang-jjigae.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 된장·두부. 선택 재료 애호박·양파·감자·대파·청양고추·버섯.
+- [순두부찌개](https://recipe.eliteaja.com/recipe/sundubu-jjigae.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 순두부·고춧가루. 선택 재료 돼지고기·김치·양파·대파·계란·다진마늘.
+- [부대찌개](https://recipe.eliteaja.com/recipe/budae-jjigae.html): 한식·국·찌개, 조리 30분, 3인분. 필수 재료 김치·소시지·고춧가루. 선택 재료 스팸·두부·라면사리·양파·대파·베이킹빈스.
+- [미역국](https://recipe.eliteaja.com/recipe/miyeok-guk.html): 한식·국·찌개, 조리 35분, 3인분. 필수 재료 미역. 선택 재료 소고기·간장·다진마늘·참기름·바지락.
+- [콩나물국](https://recipe.eliteaja.com/recipe/kongnamul-guk.html): 한식·국·찌개, 조리 15분, 2인분. 필수 재료 콩나물. 선택 재료 대파·다진마늘·간장·고춧가루·멸치·다시마.
+- [계란국](https://recipe.eliteaja.com/recipe/gyeran-guk.html): 한식·국·찌개, 조리 10분, 2인분. 필수 재료 계란. 선택 재료 대파·간장·다진마늘·참기름·다시마·감자전분.
+- [떡국](https://recipe.eliteaja.com/recipe/tteokguk.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 떡. 선택 재료 계란·소고기·대파·김·간장·다진마늘.
+- [닭볶음탕](https://recipe.eliteaja.com/recipe/dakbokkeumtang.html): 한식·국·찌개, 조리 45분, 3인분. 필수 재료 닭고기·감자·고춧가루·간장. 선택 재료 양파·당근·대파·청양고추·고추장·다진마늘.
+- [제육볶음](https://recipe.eliteaja.com/recipe/jeyuk-bokkeum.html): 한식·볶음·구이, 조리 25분, 2인분. 필수 재료 돼지고기·고추장·고춧가루. 선택 재료 양파·대파·당근·양배추·청양고추·간장.
+- [소불고기](https://recipe.eliteaja.com/recipe/bulgogi.html): 한식·볶음·구이, 조리 30분, 2인분. 필수 재료 소고기·간장·설탕. 선택 재료 양파·대파·당근·버섯·배·다진마늘.
+- [두부김치](https://recipe.eliteaja.com/recipe/dubu-kimchi.html): 한식·볶음·구이, 조리 20분, 2인분. 필수 재료 두부·김치. 선택 재료 돼지고기·양파·대파·고춧가루·설탕·참기름.
+- [두부조림](https://recipe.eliteaja.com/recipe/dubu-jorim.html): 한식·반찬, 조리 20분, 2인분. 필수 재료 두부·간장·고춧가루. 선택 재료 양파·대파·청양고추·다진마늘·설탕·참기름.
+- [계란말이](https://recipe.eliteaja.com/recipe/gyeran-mari.html): 한식·반찬, 조리 15분, 2인분. 필수 재료 계란. 선택 재료 당근·양파·대파·햄·치즈·김.
+- [뚝배기 계란찜](https://recipe.eliteaja.com/recipe/gyeran-jjim.html): 한식·반찬, 조리 15분, 2인분. 필수 재료 계란. 선택 재료 대파·당근·새우젓·참기름·깨·소금.
+- [감자조림](https://recipe.eliteaja.com/recipe/gamja-jorim.html): 한식·반찬, 조리 25분, 3인분. 필수 재료 감자·간장. 선택 재료 양파·당근·꽈리고추·설탕·물엿·다진마늘.
+- [애호박볶음](https://recipe.eliteaja.com/recipe/aehobak-bokkeum.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 애호박. 선택 재료 양파·새우젓·다진마늘·대파·참기름·깨.
+- [콩나물무침](https://recipe.eliteaja.com/recipe/kongnamul-muchim.html): 한식·반찬, 조리 15분, 3인분. 필수 재료 콩나물. 선택 재료 대파·다진마늘·참기름·깨·고춧가루·소금.
+- [시금치나물](https://recipe.eliteaja.com/recipe/sigeumchi-namul.html): 한식·반찬, 조리 12분, 2인분. 필수 재료 시금치. 선택 재료 다진마늘·간장·참기름·깨·대파.
+- [멸치볶음](https://recipe.eliteaja.com/recipe/myeolchi-bokkeum.html): 한식·반찬, 조리 15분, 4인분. 필수 재료 멸치·간장. 선택 재료 꽈리고추·아몬드·호두·물엿·설탕·다진마늘.
+- [어묵볶음](https://recipe.eliteaja.com/recipe/eomuk-bokkeum.html): 한식·반찬, 조리 15분, 3인분. 필수 재료 어묵·간장. 선택 재료 양파·당근·대파·피망·설탕·다진마늘.
+- [오징어볶음](https://recipe.eliteaja.com/recipe/ojingeo-bokkeum.html): 한식·볶음·구이, 조리 25분, 2인분. 필수 재료 오징어·고추장·고춧가루. 선택 재료 양파·양배추·당근·대파·청양고추·간장.
+- [소시지 야채볶음](https://recipe.eliteaja.com/recipe/sausage-bokkeum.html): 한식·볶음·구이, 조리 15분, 2인분. 필수 재료 소시지·케찹. 선택 재료 양파·피망·당근·양배추·브로콜리·설탕.
+- [김치볶음밥](https://recipe.eliteaja.com/recipe/kimchi-bokkeumbap.html): 한식·밥·면, 조리 15분, 1인분. 필수 재료 밥·김치. 선택 재료 계란·스팸·돼지고기·대파·참치캔·김.
+- [계란볶음밥](https://recipe.eliteaja.com/recipe/gyeran-bokkeumbap.html): 한식·밥·면, 조리 12분, 1인분. 필수 재료 밥·계란. 선택 재료 대파·당근·양파·간장·참기름·후추.
+- [간장계란밥](https://recipe.eliteaja.com/recipe/ganjang-gyeranbap.html): 한식·밥·면, 조리 7분, 1인분. 필수 재료 밥·계란·간장. 선택 재료 참기름·김·깨·버터·설탕·대파.
+- [비빔밥](https://recipe.eliteaja.com/recipe/bibimbap.html): 한식·밥·면, 조리 25분, 2인분. 필수 재료 밥·고추장. 선택 재료 계란·콩나물·시금치·당근·애호박·버섯.
+- [참치마요 덮밥](https://recipe.eliteaja.com/recipe/chamchi-mayo-bap.html): 한식·밥·면, 조리 10분, 1인분. 필수 재료 밥·참치캔·마요네즈. 선택 재료 계란·양파·간장·설탕·김·깨.
+- [오므라이스](https://recipe.eliteaja.com/recipe/omurice.html): 양식·밥·면, 조리 25분, 1인분. 필수 재료 밥·계란·케찹. 선택 재료 양파·당근·햄·소시지·피망·버터.
+- [카레라이스](https://recipe.eliteaja.com/recipe/curry-rice.html): 양식·밥·면, 조리 30분, 3인분. 필수 재료 밥·카레가루·감자·양파. 선택 재료 당근·돼지고기·소고기·닭고기·버섯·애호박.
+- [짜장밥](https://recipe.eliteaja.com/recipe/jajangbap.html): 중식·밥·면, 조리 30분, 2인분. 필수 재료 밥·춘장·양파. 선택 재료 돼지고기·감자·애호박·양배추·설탕·감자전분.
+- [마파두부](https://recipe.eliteaja.com/recipe/mapo-dubu.html): 중식·볶음·구이, 조리 20분, 2인분. 필수 재료 두부·돼지고기·간장. 선택 재료 두반장·대파·양파·고춧가루·다진마늘·설탕.
+- [고추장 떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·고추장·고춧가루. 선택 재료 어묵·대파·양배추·계란·설탕·간장.
+- [콩나물 라면](https://recipe.eliteaja.com/recipe/rabokki-ramyeon.html): 분식·간식·분식, 조리 10분, 1인분. 필수 재료 라면·콩나물. 선택 재료 계란·대파·김치·치즈·만두.
+- [잔치국수](https://recipe.eliteaja.com/recipe/janchi-guksu.html): 한식·밥·면, 조리 25분, 2인분. 필수 재료 소면. 선택 재료 계란·애호박·당근·김·대파·멸치.
+- [비빔국수](https://recipe.eliteaja.com/recipe/bibim-guksu.html): 한식·밥·면, 조리 15분, 1인분. 필수 재료 소면·고추장·식초. 선택 재료 김치·오이·상추·계란·설탕·간장.
+- [토마토 파스타](https://recipe.eliteaja.com/recipe/tomato-pasta.html): 양식·밥·면, 조리 25분, 2인분. 필수 재료 스파게티면·토마토소스. 선택 재료 양파·마늘·베이컨·버섯·올리브오일·파마산치즈.
+- [알리오 올리오](https://recipe.eliteaja.com/recipe/aglio-olio.html): 양식·밥·면, 조리 20분, 1인분. 필수 재료 스파게티면·마늘·올리브오일. 선택 재료 페페론치노·파슬리·파마산치즈·후추·베이컨·새우.
+- [크림 파스타](https://recipe.eliteaja.com/recipe/cream-pasta.html): 양식·밥·면, 조리 25분, 2인분. 필수 재료 스파게티면·우유. 선택 재료 생크림·베이컨·양파·마늘·버터·버섯.
+- [감자전](https://recipe.eliteaja.com/recipe/gamjajeon.html): 한식·간식·분식, 조리 25분, 2인분. 필수 재료 감자. 선택 재료 양파·부추·청양고추·감자전분·소금·간장.
+- [김치전](https://recipe.eliteaja.com/recipe/kimchijeon.html): 한식·간식·분식, 조리 20분, 2인분. 필수 재료 김치·밀가루. 선택 재료 감자전분·양파·대파·청양고추·오징어·설탕.
+- [부추전](https://recipe.eliteaja.com/recipe/buchujeon.html): 한식·간식·분식, 조리 20분, 2인분. 필수 재료 부추·밀가루. 선택 재료 감자전분·양파·당근·청양고추·오징어·새우.
+- [애호박전](https://recipe.eliteaja.com/recipe/aehobakjeon.html): 한식·반찬, 조리 15분, 2인분. 필수 재료 애호박·계란·밀가루. 선택 재료 소금·후추·간장·식초.
+- [김치 치즈 토스트](https://recipe.eliteaja.com/recipe/kimchi-cheese-toast.html): 양식·간식·분식, 조리 12분, 1인분. 필수 재료 식빵·김치·치즈. 선택 재료 버터·계란·마요네즈·설탕·햄·케찹.
+- [프렌치토스트](https://recipe.eliteaja.com/recipe/french-toast.html): 양식·간식·분식, 조리 12분, 1인분. 필수 재료 식빵·계란·우유. 선택 재료 버터·설탕·시나몬가루·꿀·잼·바나나.
+- [계란 샌드위치](https://recipe.eliteaja.com/recipe/gyeran-sandwich.html): 양식·간식·분식, 조리 20분, 1인분. 필수 재료 식빵·계란·마요네즈. 선택 재료 양파·오이·설탕·후추·버터·머스타드.
+- [야채 스크램블 에그](https://recipe.eliteaja.com/recipe/scrambled-egg.html): 양식·반찬, 조리 10분, 1인분. 필수 재료 계란. 선택 재료 우유·버터·양파·피망·토마토·치즈.
+- [오이무침](https://recipe.eliteaja.com/recipe/oi-muchim.html): 한식·반찬, 조리 15분, 2인분. 필수 재료 오이·고춧가루. 선택 재료 양파·당근·식초·설탕·다진마늘·참기름.
+- [닭가슴살 샐러드](https://recipe.eliteaja.com/recipe/dak-salad.html): 양식·반찬, 조리 20분, 1인분. 필수 재료 닭가슴살. 선택 재료 양상추·토마토·오이·양파·올리브오일·식초.
+- [참치 김치찌개](https://recipe.eliteaja.com/recipe/kimchi-jjigae-tuna.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 김치·참치캔·고춧가루. 선택 재료 두부·양파·대파·청양고추·다진마늘·설탕.
+- [스팸 김치찌개](https://recipe.eliteaja.com/recipe/kimchi-jjigae-spam.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 김치·스팸·고춧가루. 선택 재료 두부·양파·대파·계란·다진마늘·설탕.
+- [꽁치 김치찌개](https://recipe.eliteaja.com/recipe/kimchi-jjigae-kkongchi.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 김치·꽁치통조림·고춧가루. 선택 재료 양파·대파·청양고추·다진마늘·생강·설탕.
+- [들기름 묵은지찌개](https://recipe.eliteaja.com/recipe/kimchi-jjigae-deulgireum.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 김치·들기름. 선택 재료 두부·양파·대파·다시마·설탕·다진마늘.
+- [차돌 된장찌개](https://recipe.eliteaja.com/recipe/doenjang-jjigae-beef.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 된장·소고기. 선택 재료 두부·애호박·양파·버섯·대파·청양고추.
+- [바지락 된장찌개](https://recipe.eliteaja.com/recipe/doenjang-jjigae-clam.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 된장·바지락. 선택 재료 두부·애호박·양파·대파·청양고추·다진마늘.
+- [해물 순두부찌개](https://recipe.eliteaja.com/recipe/sundubu-seafood.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 순두부·새우·고춧가루. 선택 재료 바지락·오징어·계란·양파·대파·다진마늘.
+- [새우볶음밥](https://recipe.eliteaja.com/recipe/bokkeumbap-shrimp.html): 중식·밥·면, 조리 15분, 1인분. 필수 재료 밥·새우·계란. 선택 재료 대파·당근·양파·굴소스·간장·참기름.
+- [스팸볶음밥](https://recipe.eliteaja.com/recipe/bokkeumbap-spam.html): 한식·밥·면, 조리 15분, 1인분. 필수 재료 밥·스팸. 선택 재료 계란·대파·당근·양파·김·간장.
+- [베이컨 마늘볶음밥](https://recipe.eliteaja.com/recipe/bokkeumbap-garlic.html): 양식·밥·면, 조리 15분, 1인분. 필수 재료 밥·베이컨·마늘. 선택 재료 버터·간장·후추·파슬리·계란·양파.
+- [로제 파스타](https://recipe.eliteaja.com/recipe/rose-pasta.html): 양식·밥·면, 조리 25분, 2인분. 필수 재료 스파게티면·토마토소스·우유. 선택 재료 생크림·베이컨·양파·마늘·버터·파마산치즈.
+- [간장버터 파스타](https://recipe.eliteaja.com/recipe/ganjang-butter-pasta.html): 양식·밥·면, 조리 15분, 1인분. 필수 재료 스파게티면·간장·버터. 선택 재료 마늘·대파·베이컨·계란·김·후추.
+- [궁중떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-gungjung.html): 한식·간식·분식, 조리 25분, 2인분. 필수 재료 떡·간장·설탕. 선택 재료 소고기·당근·양파·버섯·피망·대파.
+- [로제떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-rose.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·고추장·우유. 선택 재료 생크림·어묵·소시지·베이컨·양파·대파.
+- [짜장떡볶이](https://recipe.eliteaja.com/recipe/tteokbokki-jajang.html): 분식·간식·분식, 조리 20분, 2인분. 필수 재료 떡·춘장. 선택 재료 양파·양배추·어묵·대파·돼지고기·설탕.
+- [김치 라면](https://recipe.eliteaja.com/recipe/ramyeon-kimchi.html): 분식·간식·분식, 조리 10분, 1인분. 필수 재료 라면·김치. 선택 재료 계란·대파·치즈·스팸·두부·콩나물.
+- [치즈 라면](https://recipe.eliteaja.com/recipe/ramyeon-cheese.html): 분식·간식·분식, 조리 8분, 1인분. 필수 재료 라면·치즈. 선택 재료 계란·대파·우유·후추·김치.
+- [떡만두 라면](https://recipe.eliteaja.com/recipe/ramyeon-tteok.html): 분식·간식·분식, 조리 12분, 1인분. 필수 재료 라면·떡. 선택 재료 만두·계란·대파·김·치즈·콩나물.
+- [해물파전](https://recipe.eliteaja.com/recipe/haemul-pajeon.html): 한식·간식·분식, 조리 25분, 2인분. 필수 재료 대파·밀가루·오징어. 선택 재료 새우·계란·감자전분·청양고추·간장·식초.
+- [간장비빔국수](https://recipe.eliteaja.com/recipe/ganjang-guksu.html): 한식·밥·면, 조리 12분, 1인분. 필수 재료 소면·간장. 선택 재료 계란·김·대파·참기름·설탕·깨.
+- [길거리 토스트](https://recipe.eliteaja.com/recipe/street-toast.html): 양식·간식·분식, 조리 15분, 1인분. 필수 재료 식빵·계란·양배추. 선택 재료 당근·대파·햄·치즈·버터·설탕.
+- [햄치즈 토스트](https://recipe.eliteaja.com/recipe/ham-cheese-toast.html): 양식·간식·분식, 조리 10분, 1인분. 필수 재료 식빵·햄·치즈. 선택 재료 버터·계란·머스타드·마요네즈·양상추·토마토.
+- [간장 두루치기](https://recipe.eliteaja.com/recipe/duruchigi-ganjang.html): 한식·볶음·구이, 조리 25분, 2인분. 필수 재료 돼지고기·간장. 선택 재료 양파·대파·당근·버섯·양배추·설탕.
+- [스팸마요 덮밥](https://recipe.eliteaja.com/recipe/spam-mayo-bap.html): 한식·밥·면, 조리 12분, 1인분. 필수 재료 밥·스팸·마요네즈. 선택 재료 계란·양파·간장·설탕·김·깨.
+- [전자레인지 계란찜](https://recipe.eliteaja.com/recipe/gyeran-jjim-micro.html): 한식·반찬, 조리 7분, 1인분. 필수 재료 계란. 선택 재료 대파·당근·새우젓·참기름·깨·치즈.
+- [육개장](https://recipe.eliteaja.com/recipe/yukgaejang.html): 한식·국·찌개, 조리 60분, 3인분. 필수 재료 소고기·대파·고춧가루. 선택 재료 고사리·숙주·토란대·다진마늘·간장·참기름.
+- [어묵탕](https://recipe.eliteaja.com/recipe/eomuk-tang.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 어묵. 선택 재료 무·대파·다시마·멸치·간장·다진마늘.
+- [북엇국](https://recipe.eliteaja.com/recipe/bugeo-guk.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 북어. 선택 재료 계란·두부·대파·무·다진마늘·참기름.
+- [콩나물국밥](https://recipe.eliteaja.com/recipe/kongnamul-gukbap.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 콩나물·밥. 선택 재료 계란·김·대파·새우젓·다진마늘·고춧가루.
+- [만둣국](https://recipe.eliteaja.com/recipe/manduguk.html): 한식·국·찌개, 조리 20분, 2인분. 필수 재료 만두. 선택 재료 계란·소고기·대파·김·간장·다진마늘.
+- [떡만둣국](https://recipe.eliteaja.com/recipe/tteok-manduguk.html): 한식·국·찌개, 조리 25분, 2인분. 필수 재료 떡·만두. 선택 재료 계란·소고기·대파·김·간장·다진마늘.
+- [수제비](https://recipe.eliteaja.com/recipe/sujebi.html): 한식·밥·면, 조리 45분, 2인분. 필수 재료 밀가루·감자. 선택 재료 애호박·양파·대파·다시마·멸치·간장.
+- [삼계탕](https://recipe.eliteaja.com/recipe/samgyetang.html): 한식·국·찌개, 조리 70분, 2인분. 필수 재료 닭고기·찹쌀. 선택 재료 대추·수삼·마늘·대파·밤·소금.
+- [감자탕](https://recipe.eliteaja.com/recipe/gamjatang.html): 한식·국·찌개, 조리 90분, 3인분. 필수 재료 돼지등뼈·감자·고춧가루. 선택 재료 우거지·깻잎·대파·양파·들깨가루·된장.
+- [김밥](https://recipe.eliteaja.com/recipe/gimbap.html): 한식·밥·면, 조리 40분, 2인분. 필수 재료 밥·김·단무지. 선택 재료 계란·당근·시금치·맛살·햄·우엉.
+- [참치김밥](https://recipe.eliteaja.com/recipe/gimbap-tuna.html): 한식·밥·면, 조리 35분, 2인분. 필수 재료 밥·김·참치캔·마요네즈. 선택 재료 단무지·계란·당근·양파·깻잎·참기름.
+- [주먹밥](https://recipe.eliteaja.com/recipe/jumeokbap.html): 한식·밥·면, 조리 15분, 1인분. 필수 재료 밥·김. 선택 재료 김치·참치캔·스팸·계란·당근·참기름.
+- [유부초밥](https://recipe.eliteaja.com/recipe/yubu-chobap.html): 일식·밥·면, 조리 20분, 2인분. 필수 재료 밥·유부. 선택 재료 식초·설탕·깨·당근·오이·계란.
+- [소고기덮밥](https://recipe.eliteaja.com/recipe/gyudon.html): 일식·밥·면, 조리 20분, 1인분. 필수 재료 밥·소고기·양파·간장. 선택 재료 계란·설탕·맛술·대파·생강·깨.
+- [치킨마요덮밥](https://recipe.eliteaja.com/recipe/chicken-mayo-bap.html): 일식·밥·면, 조리 25분, 1인분. 필수 재료 밥·닭고기·마요네즈. 선택 재료 계란·간장·설탕·맛술·감자전분·김.
+- [제육덮밥](https://recipe.eliteaja.com/recipe/jeyuk-deopbap.html): 한식·밥·면, 조리 25분, 1인분. 필수 재료 밥·돼지고기·고추장. 선택 재료 양파·대파·양배추·당근·계란·고춧가루.
+- [야채죽](https://recipe.eliteaja.com/recipe/yachae-juk.html): 한식·밥·면, 조리 30분, 2인분. 필수 재료 밥. 선택 재료 당근·애호박·양파·버섯·참기름·소금.
+- [닭죽](https://recipe.eliteaja.com/recipe/dak-juk.html): 한식·밥·면, 조리 50분, 2인분. 필수 재료 닭고기·밥. 선택 재료 찹쌀·당근·양파·대파·마늘·참기름.
+- [칼국수](https://recipe.eliteaja.com/recipe/kalguksu.html): 한식·밥·면, 조리 30분, 2인분. 필수 재료 칼국수면. 선택 재료 애호박·감자·양파·대파·바지락·멸치.
+- [콩국수](https://recipe.eliteaja.com/recipe/kong-guksu.html): 한식·밥·면, 조리 20분, 2인분. 필수 재료 소면·두유. 선택 재료 오이·토마토·깨·소금·설탕·계란.
+- [김치말이국수](https://recipe.eliteaja.com/recipe/kimchi-mari-guksu.html): 한식·밥·면, 조리 15분, 1인분. 필수 재료 소면·김치. 선택 재료 오이·계란·김·깨·설탕·식초.
+- [물냉면](https://recipe.eliteaja.com/recipe/mul-naengmyeon.html): 한식·밥·면, 조리 20분, 1인분. 필수 재료 냉면사리. 선택 재료 오이·배·계란·무·식초·설탕.
+- [비빔냉면](https://recipe.eliteaja.com/recipe/bibim-naengmyeon.html): 한식·밥·면, 조리 20분, 1인분. 필수 재료 냉면사리·고추장. 선택 재료 오이·배·계란·식초·설탕·간장.
+- [쫄면](https://recipe.eliteaja.com/recipe/jjolmyeon.html): 분식·밥·면, 조리 20분, 1인분. 필수 재료 쫄면사리·고추장. 선택 재료 콩나물·양배추·오이·당근·상추·계란.
+- [짬뽕](https://recipe.eliteaja.com/recipe/jjamppong.html): 중식·밥·면, 조리 30분, 2인분. 필수 재료 중화면·고춧가루·오징어. 선택 재료 새우·바지락·양배추·양파·당근·대파.
+- [잡채](https://recipe.eliteaja.com/recipe/japchae.html): 한식·볶음·구이, 조리 45분, 3인분. 필수 재료 당면·간장·참기름. 선택 재료 소고기·시금치·당근·양파·버섯·피망.
+- [닭갈비](https://recipe.eliteaja.com/recipe/dakgalbi.html): 한식·볶음·구이, 조리 40분, 3인분. 필수 재료 닭고기·고추장·고춧가루. 선택 재료 양배추·고구마·떡·깻잎·양파·대파.
+- [쭈꾸미볶음](https://recipe.eliteaja.com/recipe/jjukkumi-bokkeum.html): 한식·볶음·구이, 조리 25분, 2인분. 필수 재료 쭈꾸미·고추장·고춧가루. 선택 재료 양파·양배추·대파·당근·깻잎·청양고추.
+- [차돌 숙주볶음](https://recipe.eliteaja.com/recipe/chadol-sukju.html): 한식·볶음·구이, 조리 15분, 2인분. 필수 재료 소고기·숙주. 선택 재료 대파·양파·부추·굴소스·간장·다진마늘.
+- [콩나물불고기](https://recipe.eliteaja.com/recipe/kongnamul-bulgogi.html): 한식·볶음·구이, 조리 30분, 2인분. 필수 재료 돼지고기·콩나물·고춧가루. 선택 재료 양파·대파·당근·깻잎·고추장·간장.
+- [고등어구이](https://recipe.eliteaja.com/recipe/godeungeo-gui.html): 한식·볶음·구이, 조리 20분, 2인분. 필수 재료 고등어. 선택 재료 소금·맛술·밀가루·레몬·무·간장.
+- [돈까스](https://recipe.eliteaja.com/recipe/donkatsu.html): 일식·볶음·구이, 조리 35분, 2인분. 필수 재료 돼지고기·빵가루·계란·밀가루. 선택 재료 양배추·돈까스소스·케찹·간장·설탕·후추.
+- [동그랑땡](https://recipe.eliteaja.com/recipe/donggeurangttaeng.html): 한식·반찬, 조리 35분, 3인분. 필수 재료 돼지고기·두부·계란. 선택 재료 양파·당근·대파·부추·밀가루·다진마늘.
+- [깻잎전](https://recipe.eliteaja.com/recipe/kkaennipjeon.html): 한식·반찬, 조리 30분, 2인분. 필수 재료 깻잎·돼지고기·계란·밀가루. 선택 재료 두부·양파·당근·대파·다진마늘·소금.
+- [찜닭](https://recipe.eliteaja.com/recipe/jjimdak.html): 한식·국·찌개, 조리 45분, 3인분. 필수 재료 닭고기·간장·당면. 선택 재료 감자·당근·양파·대파·청양고추·페페론치노.
+- [갈비찜](https://recipe.eliteaja.com/recipe/galbijjim.html): 한식·국·찌개, 조리 90분, 4인분. 필수 재료 소고기·간장·설탕. 선택 재료 무·당근·감자·양파·대파·배.
+- [고등어조림](https://recipe.eliteaja.com/recipe/godeungeo-jorim.html): 한식·국·찌개, 조리 35분, 2인분. 필수 재료 고등어·무·고춧가루. 선택 재료 양파·대파·청양고추·간장·설탕·다진마늘.
+- [소고기장조림](https://recipe.eliteaja.com/recipe/jangjorim-beef.html): 한식·반찬, 조리 60분, 4인분. 필수 재료 소고기·간장. 선택 재료 메추리알·꽈리고추·마늘·설탕·대파·생강.
+- [메추리알장조림](https://recipe.eliteaja.com/recipe/jangjorim-egg.html): 한식·반찬, 조리 25분, 3인분. 필수 재료 메추리알·간장. 선택 재료 꽈리고추·마늘·설탕·물엿·대파·청양고추.
+- [진미채볶음](https://recipe.eliteaja.com/recipe/jinmichae-bokkeum.html): 한식·반찬, 조리 15분, 4인분. 필수 재료 진미채·고추장. 선택 재료 마요네즈·물엿·설탕·간장·다진마늘·참기름.
+- [무생채](https://recipe.eliteaja.com/recipe/mu-saengchae.html): 한식·반찬, 조리 20분, 3인분. 필수 재료 무·고춧가루. 선택 재료 대파·다진마늘·식초·설탕·새우젓·소금.
+- [배추겉절이](https://recipe.eliteaja.com/recipe/baechu-geotjeori.html): 한식·반찬, 조리 30분, 4인분. 필수 재료 배추·고춧가루. 선택 재료 대파·부추·다진마늘·새우젓·설탕·소금.
+- [콩자반](https://recipe.eliteaja.com/recipe/kongjaban.html): 한식·반찬, 조리 50분, 5인분. 필수 재료 검은콩·간장. 선택 재료 설탕·물엿·참기름·깨·다시마.
+- [가지볶음](https://recipe.eliteaja.com/recipe/gaji-bokkeum.html): 한식·반찬, 조리 15분, 2인분. 필수 재료 가지. 선택 재료 양파·대파·간장·다진마늘·고춧가루·참기름.
+- [버섯 리조또](https://recipe.eliteaja.com/recipe/risotto.html): 양식·밥·면, 조리 35분, 2인분. 필수 재료 밥·버섯·우유. 선택 재료 생크림·양파·마늘·버터·파마산치즈·베이컨.
+- [양송이수프](https://recipe.eliteaja.com/recipe/mushroom-soup.html): 양식·국·찌개, 조리 30분, 2인분. 필수 재료 버섯·우유·밀가루. 선택 재료 양파·버터·생크림·후추·소금·파슬리.
+- [함박스테이크](https://recipe.eliteaja.com/recipe/hamburg-steak.html): 양식·볶음·구이, 조리 40분, 2인분. 필수 재료 돼지고기·양파·빵가루·계란. 선택 재료 소고기·우유·버터·케찹·간장·설탕.
+- [감자 그라탱](https://recipe.eliteaja.com/recipe/potato-gratin.html): 양식·볶음·구이, 조리 50분, 2인분. 필수 재료 감자·우유·치즈. 선택 재료 생크림·버터·마늘·양파·베이컨·후추.
+- [호떡](https://recipe.eliteaja.com/recipe/hotteok.html): 간식·간식·분식, 조리 90분, 3인분. 필수 재료 밀가루·설탕·이스트. 선택 재료 흑설탕·시나몬가루·호두·아몬드·우유·소금.
+- [핫도그](https://recipe.eliteaja.com/recipe/corn-dog.html): 간식·간식·분식, 조리 30분, 2인분. 필수 재료 소시지·밀가루·빵가루. 선택 재료 치즈·설탕·계란·우유·이스트·케찹.
+- [피자토스트](https://recipe.eliteaja.com/recipe/pizza-toast.html): 양식·간식·분식, 조리 15분, 1인분. 필수 재료 식빵·케찹·치즈. 선택 재료 토마토소스·양파·피망·햄·소시지·베이컨.
+
+## 참고
+
+- 전체 목록: https://recipe.eliteaja.com/recipes.html
+- 사이트 내 장보기 링크는 쿠팡 파트너스 활동으로 수수료를 받는다.

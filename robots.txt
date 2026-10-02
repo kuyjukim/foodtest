@@ -13,4 +13,20 @@ Allow: /
 User-agent: daum
 Allow: /
 
+# AI 검색·답변 서비스. 인용될 때 출처로 노출되므로 허용한다.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://recipe.eliteaja.com/sitemap.xml

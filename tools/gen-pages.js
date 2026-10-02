@@ -174,6 +174,107 @@ ${jsonLd(r)}
 `;
 }
 
+/* 첫 화면 아래에 들어갈 설명과 링크.
+ * 첫 화면은 자바스크립트 앱이라 크롤러가 읽을 글자가 320자뿐이었다.
+ * 사람이 스크롤 끝에서 읽어도 쓸모 있는 내용으로 채운다. */
+const POPULAR = ['kimchi-jjigae', 'jeyuk-bokkeum', 'kimchi-bokkeumbap', 'doenjang-jjigae',
+                 'tteokbokki', 'japchae', 'bulgogi', 'miyeok-guk', 'gyeran-mari',
+                 'gimbap', 'dakgalbi', 'tomato-pasta'];
+
+function footContent() {
+  const kinds = {};
+  RECIPES.forEach(r => kinds[r.kind] = (kinds[r.kind] || 0) + 1);
+  const picks = POPULAR.map(id => RECIPES.find(r => r.id === id)).filter(Boolean);
+
+  return `<div class="foot-about">
+    <h2>집에 있는 재료로 요리 찾기</h2>
+    <p>냉장고에 남은 재료를 담으면 지금 만들 수 있는 요리만 골라서 보여줍니다.
+       한식·양식·중식·일식 레시피 ${RECIPES.length}개, 요리 ${new Set(RECIPES.map(famOf)).size}종이 들어 있습니다.
+       없는 재료는 무엇으로 대신할 수 있는지 함께 알려 주고,
+       김치찌개처럼 여러 버전이 있는 요리는 가진 재료에 맞는 쪽을 먼저 보여 줍니다.
+       설치하면 인터넷 없이도 열립니다.</p>
+    <p>${Object.entries(kinds).map(([k, n]) => `${esc(k)} ${n}개`).join(' · ')}</p>
+    <h3>자주 찾는 요리</h3>
+    <ul class="foot-links">${picks.map(r =>
+      `<li><a href="recipe/${esc(r.id)}.html">${esc(r.name)}</a></li>`).join('')}</ul>
+    <p><a href="recipes.html"><b>레시피 ${RECIPES.length}개 전체 보기 →</b></a></p>
+  </div>`;
+}
+
+/* 레시피 전체 목록 페이지.
+ * 첫 화면은 자바스크립트 앱이라 크롤러가 읽을 글자가 거의 없다.
+ * 레시피 125개로 들어가는 길을 HTML 로 열어 준다. */
+function indexPage() {
+  const byKind = {};
+  RECIPES.forEach(r => (byKind[r.kind] = byKind[r.kind] || []).push(r));
+
+  const list = Object.entries(byKind).map(([kind, rs]) => `
+    <h2>${esc(kind)} <span class="count">${rs.length}</span></h2>
+    <ul class="recipe-index">${rs.map(r => `
+      <li><a href="recipe/${esc(r.id)}.html"><b>${esc(r.name)}</b></a>
+          <span class="ri-meta">${r.time}분 · ${esc(r.difficulty)}</span>
+          <span class="ri-ing">${esc(r.essential.join(', '))}</span></li>`).join('')}
+    </ul>`).join('');
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: '레시피 전체 목록',
+    description: `집에 있는 재료로 만들 수 있는 한식·양식·중식·일식 레시피 ${RECIPES.length}개`,
+    url: `${BASE}/recipes.html`,
+    isPartOf: { '@type': 'WebSite', name: '오늘 뭐 먹지?', url: BASE + '/' },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: RECIPES.length,
+      itemListElement: RECIPES.map((r, i) => ({
+        '@type': 'ListItem', position: i + 1,
+        name: r.name, url: `${BASE}/recipe/${r.id}.html`
+      }))
+    }
+  };
+
+  return `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>레시피 전체 목록 ${RECIPES.length}개 — 오늘 뭐 먹지?</title>
+<meta name="description" content="집에 있는 재료로 만들 수 있는 한식·양식·중식·일식 레시피 ${RECIPES.length}개를 종류별로 모았습니다. 재료와 조리시간을 함께 볼 수 있습니다.">
+<link rel="canonical" href="${BASE}/recipes.html">
+${verifyTags()}
+${analyticsTag()}
+<meta property="og:type" content="website">
+<meta property="og:title" content="레시피 전체 목록 ${RECIPES.length}개">
+<meta property="og:description" content="재료와 조리시간을 한눈에. 집에 있는 재료로 만들 수 있는 것부터 찾아보세요.">
+<meta property="og:image" content="${BASE}/og.png">
+<meta property="og:url" content="${BASE}/recipes.html">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<script type="application/ld+json">
+${JSON.stringify(ld, null, 2)}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./" style="text-decoration:none;color:inherit">
+    <span class="logo" aria-hidden="true">🍳</span>
+    <div><h1 style="font-size:17px">오늘 뭐 먹지?</h1></div>
+  </a>
+</header>
+<main class="layout" style="grid-template-columns:1fr;max-width:860px">
+  <article class="panel" style="position:static;max-height:none;overflow:visible">
+    <h2 style="font-size:24px;margin:0 0 8px">레시피 ${RECIPES.length}개</h2>
+    <p class="muted small">요리 ${new Set(RECIPES.map(famOf)).size}종. 집에 있는 재료로 만들 수 있는 것만 보려면
+       <a href="./">재료를 담아</a> 보세요.</p>
+    ${list}
+    <p style="margin-top:26px"><a href="./">← 재료로 요리 찾기</a></p>
+  </article>
+</main>
+</body>
+</html>
+`;
+}
+
 /* ── 실행 ── */
 fs.mkdirSync(OUT_DIR, { recursive: true });
 // 이전에 만든 파일 중 지금 레시피에 없는 건 지운다
@@ -182,8 +283,42 @@ fs.readdirSync(OUT_DIR).forEach(f => { if (!keep.has(f)) fs.unlinkSync(path.join
 
 RECIPES.forEach(r => fs.writeFileSync(path.join(OUT_DIR, r.id + '.html'), page(r)));
 
+fs.writeFileSync(path.join(ROOT, 'recipes.html'), indexPage());
+
+/* AI 검색엔진용 안내 파일. 사이트가 무엇이고 어떤 레시피가 있는지
+ * 평문으로 적어 둔다. 아직 표준은 아니지만 비용이 거의 없다. */
+fs.writeFileSync(path.join(ROOT, 'llms.txt'),
+`# 오늘 뭐 먹지?
+
+> 집에 있는 재료를 입력하면 지금 만들 수 있는 요리를 찾아주는 한국어 레시피 사이트.
+> 레시피 ${RECIPES.length}개(요리 ${new Set(RECIPES.map(famOf)).size}종). ${BASE}/
+
+## 이 사이트가 하는 일
+
+- 가진 재료를 넣으면 그것으로 만들 수 있는 요리만 보여준다.
+- 없는 재료는 무엇으로 대신할 수 있는지 알려준다.
+  예: 고추장이 없으면 고춧가루 2 : 된장 1 : 설탕 1 로 대신한다.
+  단, 요리 이름에 들어간 재료(오징어볶음의 오징어)는 대체하지 않는다.
+- 같은 요리의 여러 버전을 가지고 있다. 김치찌개는 돼지고기·참치·스팸·꽁치·들기름 5종.
+- 소금·설탕·간장 등 기본 양념 15가지는 집에 있다고 가정하며, 사용자가 끌 수 있다.
+
+## 레시피 목록
+
+${RECIPES.map(r =>
+  `- [${r.name}](${BASE}/recipe/${r.id}.html): ${r.category}·${r.kind}, 조리 ${r.time}분, ${r.servings}인분. ` +
+  `필수 재료 ${r.essential.join('·')}.` +
+  (r.optional.length ? ` 선택 재료 ${r.optional.slice(0, 6).join('·')}.` : '')
+).join('\n')}
+
+## 참고
+
+- 전체 목록: ${BASE}/recipes.html
+- 사이트 내 장보기 링크는 쿠팡 파트너스 활동으로 수수료를 받는다.
+`);
+
 const today = new Date().toISOString().slice(0, 10);
-const urls = [`${BASE}/`].concat(RECIPES.map(r => `${BASE}/recipe/${r.id}.html`));
+const urls = [`${BASE}/`, `${BASE}/recipes.html`]
+  .concat(RECIPES.map(r => `${BASE}/recipe/${r.id}.html`));
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
 `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -212,6 +347,22 @@ Allow: /
 User-agent: daum
 Allow: /
 
+# AI 검색·답변 서비스. 인용될 때 출처로 노출되므로 허용한다.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: ${BASE}/sitemap.xml
 `);
 
@@ -226,11 +377,21 @@ if (indexHtml.includes(MARK_A)) {
   const tags = [verifyTags(), analyticsTag()].filter(Boolean).join('\n');
   fs.writeFileSync(INDEX, before + (tags ? '\n' + tags + '\n' : '\n') + after);
   console.log('소유확인:', verifyTags() ? '넣음' : '설정값 없음');
+
+  // 첫 화면 아래 설명·링크도 같이 채운다
+  let html2 = fs.readFileSync(INDEX, 'utf8');
+  const FA = '<!-- foot-content:start -->', FB = '<!-- foot-content:end -->';
+  if (html2.includes(FA)) {
+    const b2 = html2.slice(0, html2.indexOf(FA) + FA.length);
+    const a2 = html2.slice(html2.indexOf(FB));
+    fs.writeFileSync(INDEX, b2 + '\n' + footContent() + '\n  ' + a2);
+    console.log('첫 화면 설명·링크: 넣음');
+  }
   console.log('측정 태그:', analyticsTag() ? '넣음 (index + 레시피 125개)' : '설정값 없음');
 }
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);
 const own = RECIPES.filter(r => fs.existsSync(path.join(ROOT, 'og', r.id + '.png'))).length;
 console.log(`공유 이미지: 레시피별 ${own}개 / 기본 이미지 ${RECIPES.length - own}개`);
-console.log(`sitemap.xml (${urls.length}개 주소), robots.txt 생성`);
+console.log(`recipes.html (목록), llms.txt, sitemap.xml (${urls.length}개 주소), robots.txt 생성`);
 console.log(`사이트 주소: ${BASE}`);

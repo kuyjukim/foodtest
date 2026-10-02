@@ -343,8 +343,34 @@ body {
 }
 .site-foot {
   max-width: 1180px; margin: 0 auto; padding: 0 16px 40px;
-  text-align: center;
 }
+.foot-about {
+  border-top: 1px solid var(--line); padding-top: 22px; margin-bottom: 18px;
+  font-size: 13.5px; color: var(--text-dim); line-height: 1.7;
+}
+.foot-about h2 { font-size: 16px; color: var(--text); margin: 0 0 8px; }
+.foot-about h3 { font-size: 13px; color: var(--text); margin: 18px 0 8px; }
+.foot-about p { margin: 0 0 8px; max-width: 760px; }
+.foot-about a { color: var(--accent); }
+.foot-links {
+  list-style: none; padding: 0; margin: 0 0 14px;
+  display: flex; flex-wrap: wrap; gap: 7px;
+}
+.foot-links a {
+  display: inline-block; padding: 4px 11px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--text-dim); text-decoration: none; font-size: 12.5px;
+}
+.foot-links a:hover { border-color: var(--accent); color: var(--accent); }
+.recipe-index { list-style: none; padding: 0; margin: 0 0 8px; }
+.recipe-index li {
+  padding: 8px 0; border-bottom: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; font-size: 14px;
+}
+.recipe-index a { text-decoration: none; color: var(--text); }
+.recipe-index a:hover { color: var(--accent); }
+.ri-meta { font-size: 12px; color: var(--text-dim); }
+.ri-ing { font-size: 12.5px; color: var(--text-dim); flex-basis: 100%; }
 
 /* ── 상품 카드 ───────────────────────────── */
 .prod-list { display: grid; gap: 8px; margin-bottom: 10px; }

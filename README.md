@@ -266,6 +266,22 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 - **sitemap.xml / robots.txt** — 126개 주소를 색인하도록 안내합니다.
   robots 에는 네이버(Yeti)·구글·다음 크롤러를 따로 허용해 두었습니다.
 
+### 크롤러가 읽을 거리
+
+앱 첫 화면은 자바스크립트로 그려서, 크롤러가 읽을 글자가 320자(대부분 버튼 이름)뿐이었습니다.
+레시피 125개로 들어가는 길도 sitemap 말고는 없었습니다. 세 가지로 메웠습니다.
+
+- **`recipes.html`** — 125개를 종류별로 묶은 목록. 재료·조리시간이 HTML 로 들어 있고
+  `CollectionPage` + `ItemList` 구조화 데이터를 답니다.
+- **첫 화면 아래 설명과 링크** — 사이트 설명, 종류별 개수, 자주 찾는 요리 12개,
+  전체 목록으로 가는 링크. 사람이 스크롤 끝에서 읽어도 쓸모 있게 썼습니다. (320자 → 660자)
+- **`llms.txt`** — AI 검색·답변 서비스용. 사이트가 무엇이고 어떤 레시피가 있는지,
+  재료와 대체 규칙까지 평문으로 적습니다. 아직 표준은 아니지만 비용이 거의 없습니다.
+
+`robots.txt` 에는 네이버(Yeti)·구글·다음에 더해 **GPTBot·ClaudeBot·PerplexityBot·
+Google-Extended** 를 명시해 허용합니다. AI 답변에 인용될 때 출처로 노출되기 때문입니다.
+원하지 않으면 `tools/gen-pages.js` 의 robots 부분에서 `Allow` 를 `Disallow` 로 바꾸면 됩니다.
+
 ### 검색엔진에 사이트 등록
 
 소유확인 코드는 `site-verify.json` 에 넣습니다. 비어 있으면 태그를 넣지 않습니다.
@@ -352,6 +368,8 @@ tools/gen-pages.js        레시피별 정적 페이지·sitemap 생성 (배포 
 recipe/                   생성된 레시피 페이지 (자동 생성)
 og.png                    기본 공유 이미지
 og/                       레시피별 공유 이미지 125장 (자동 생성)
+recipes.html              레시피 전체 목록 (자동 생성)
+llms.txt                  AI 검색용 사이트 안내 (자동 생성)
 tools/gen-og-images.js    공유 이미지 생성
 sitemap.xml / robots.txt  검색엔진용 (자동 생성)
 ```
