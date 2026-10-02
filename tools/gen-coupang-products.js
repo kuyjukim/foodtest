@@ -22,23 +22,48 @@ const { BASE, request, withRetry, sleep, loadIngredients } = require('./coupang-
 const SEARCH_PATH = BASE + '/products/search';
 const OUT = path.join(__dirname, '..', 'data', 'coupang-products.js');
 const PER = Number(process.env.PER_INGREDIENT || 1);
+const CANDIDATES = Number(process.env.CANDIDATES || 10);
 const GAP_MS = Number(process.env.GAP_MS || 1200);
+
+/* 검색 1위를 그냥 쓰면 대용량·도매 상품이 걸린다 (마늘 20kg 15만원).
+ * 집에서 한 끼 하려는 사람에게 맞지 않는다.
+ * 그렇다고 최저가를 고르면 반대로 지나치게 작은 소포장이 걸린다.
+ * 그래서 후보를 넉넉히 받아 로켓배송을 우선하고, 그중 가격 중앙값을 고른다. */
+function pickProducts(list, count) {
+  const rocket = list.filter(p => p.rocket);
+  const pool = (rocket.length >= 3 ? rocket : list).slice().sort((a, b) => a.price - b.price);
+  if (!pool.length) return [];
+
+  const mid = Math.floor((pool.length - 1) / 2);
+  const picked = [pool[mid]];
+  let lo = mid - 1, hi = mid + 1;
+  while (picked.length < count && (lo >= 0 || hi < pool.length)) {
+    if (lo >= 0) picked.push(pool[lo--]);
+    if (picked.length < count && hi < pool.length) picked.push(pool[hi++]);
+  }
+  return picked;
+}
 
 async function search(term, keys) {
   // 서명 대상에 들어가는 query 와 실제로 보내는 query 가 같아야 한다
-  const query = `keyword=${encodeURIComponent(term)}&limit=${Math.max(PER, 3)}`;
+  const query = `keyword=${encodeURIComponent(term)}&limit=${CANDIDATES}`;
   const data = await request('GET', SEARCH_PATH, query, null, keys);
-  const list = (data && data.productData) || [];
-  return list.slice(0, PER).map(p => ({
-    name: p.productName,
-    price: p.productPrice,
-    image: p.productImage,
-    url: p.productUrl,
-    rocket: !!p.isRocket
-  })).filter(p => p.url);
+  const list = ((data && data.productData) || [])
+    .map(p => ({
+      name: p.productName,
+      price: p.productPrice,
+      image: p.productImage,
+      url: p.productUrl,
+      rocket: !!p.isRocket
+    }))
+    .filter(p => p.url && p.price > 0);
+  return pickProducts(list, PER);
 }
 
-(async () => {
+module.exports = { pickProducts };
+
+
+if (require.main === module) (async () => {
   const keys = {
     accessKey: process.env.COUPANG_ACCESS_KEY,
     secretKey: process.env.COUPANG_SECRET_KEY
