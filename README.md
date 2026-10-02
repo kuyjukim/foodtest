@@ -6,7 +6,8 @@
 
 ## 실행
 
-`index.html` 을 브라우저로 열면 바로 쓸 수 있습니다. 빌드 과정도, 설치할 패키지도 없습니다.
+배포된 주소는 **https://recipe.eliteaja.com** 입니다.
+로컬에서는 `index.html` 을 브라우저로 열면 바로 쓸 수 있습니다. 빌드 과정도, 설치할 패키지도 없습니다.
 
 앱으로 설치하려면 http 로 띄워야 합니다. (서비스워커가 `file://` 에서는 동작하지 않습니다)
 
@@ -199,7 +200,7 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 2. 그 뒤로는 `main` 에 푸시될 때마다 `.github/workflows/deploy.yml` 이 알아서 배포합니다.
    이미 푸시해 둔 상태라면 Actions 탭에서 **Re-run jobs** 를 누르면 됩니다.
 
-주소는 `https://<아이디>.github.io/<저장소이름>/` 형태가 됩니다. (현재: https://kuyjukim.github.io/foodtest/)
+주소: **https://recipe.eliteaja.com** (`kuyjukim.github.io/foodtest/` 는 이쪽으로 넘어갑니다)
 저장소 이름이 경로로 붙지만 앱의 모든 경로가 상대 경로라 그대로 동작합니다.
 (manifest 의 `start_url`·`scope`, 서비스워커 범위, 캐시 모두 그 폴더 안으로 잡힙니다)
 
@@ -221,6 +222,7 @@ HTTPS 에서만 동작합니다. GitHub Pages 설정이 들어 있습니다.
 
 3. **그다음** 저장소 루트에 `CNAME` 파일(내용 한 줄: `recipe.eliteaja.com`)을
    올리고 푸시합니다. Settings → Pages 의 Custom domain 이 자동으로 채워집니다.
+   (이 저장소는 완료된 상태입니다)
 
 4. **Enforce HTTPS** 체크. 인증서 발급에 몇 분에서 한 시간쯤 걸립니다.
 
