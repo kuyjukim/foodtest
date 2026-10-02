@@ -22,8 +22,8 @@ window.RECIPES = [
   {
     id: 'doenjang-jjigae', family: '된장찌개', label: '채소', name: '채소 된장찌개', category: '한식', kind: '국·찌개',
     time: 20, difficulty: '쉬움', servings: 2, veg: true,
-    essential: ['된장'],
-    optional: ['두부', '애호박', '양파', '감자', '대파', '청양고추', '버섯', '다진마늘', '고춧가루'],
+    essential: ['된장', '두부'],
+    optional: ['애호박', '양파', '감자', '대파', '청양고추', '버섯', '다진마늘', '고춧가루'],
     steps: [
       '냄비에 물 500ml를 붓고 끓인다. (멸치나 다시마가 있으면 5분 우려내고 건져낸다)',
       '된장 1.5큰술을 체에 풀어 넣고, 감자와 양파처럼 단단한 재료부터 넣는다.',
