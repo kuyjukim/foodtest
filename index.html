@@ -69,9 +69,14 @@
     <div id="chips" class="chips" aria-live="polite"></div>
     <p id="pantryEmpty" class="muted small">아래 <b>빠르게 담기</b>에서 골라도 됩니다.</p>
 
-    <details class="group">
+    <details class="group" id="staplesGroup">
       <summary>기본 양념 <span class="hint">집에 있다고 가정</span></summary>
-      <p class="muted small">없는 양념은 체크를 해제하세요. 해제하면 그 양념이 필요한 요리는 ‘재료 부족’으로 표시됩니다.</p>
+      <div id="staplesHint" class="first-hint" hidden>
+        <p><b>처음 오셨네요.</b> 집에 <b>없는</b> 양념은 체크를 꺼 주세요.<br>
+           그래야 ‘바로 가능’이 실제로 만들 수 있는 것만 나옵니다.</p>
+        <button id="staplesHintOk" class="link-btn" type="button">확인했어요</button>
+      </div>
+      <p class="muted small">해제하면 그 양념이 필요한 요리는 ‘재료 부족’으로 표시됩니다.</p>
       <div id="staples" class="staple-list"></div>
     </details>
 

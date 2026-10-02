@@ -374,3 +374,12 @@ body {
   background: var(--swap-soft); color: var(--swap);
 }
 .asof { font-size: 11.5px; color: var(--text-dim); margin: 0 0 10px; }
+
+/* ── 첫 방문 안내 ────────────────────────── */
+.first-hint {
+  margin: 10px 0 4px; padding: 11px 13px; border-radius: 10px;
+  background: var(--accent-soft); border-left: 3px solid var(--accent);
+}
+.first-hint p { margin: 0 0 7px; font-size: 13px; line-height: 1.55; }
+.first-hint b { color: var(--accent); }
+.first-hint .link-btn { color: var(--accent); font-size: 12.5px; }

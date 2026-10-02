@@ -11,7 +11,8 @@
   var AFF = window.AFFILIATE || {};
   var ANALYTICS = window.ANALYTICS || {};
 
-  var LS = { pantry: 'fridge.pantry', staples: 'fridge.staples', theme: 'fridge.theme' };
+  var LS = { pantry: 'fridge.pantry', staples: 'fridge.staples', theme: 'fridge.theme',
+             seenHint: 'fridge.seenStaplesHint' };
 
   /* ── 재료 이름 다루기 ──────────────────────────── */
 
@@ -217,7 +218,8 @@
   ['ingInput', 'suggest', 'chips', 'pantryCount', 'pantryEmpty', 'clearBtn', 'quickPick',
    'staples', 'searchInput', 'kindSel', 'timeSel', 'sortSel', 'makeableOnly', 'vegOnly',
    'summary', 'cards', 'noResult', 'modal', 'modalTitle', 'modalTabs', 'modalMeta',
-   'modalBody', 'themeBtn', 'installBtn', 'disclosure'
+   'modalBody', 'themeBtn', 'installBtn', 'disclosure',
+   'staplesGroup', 'staplesHint', 'staplesHintOk'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
   /* ── 내 재료 ──────────────────────────────────── */
@@ -284,6 +286,7 @@
         if (cb.checked) state.stapleOff = state.stapleOff.filter(function (s) { return s !== name; });
         else if (state.stapleOff.indexOf(name) === -1) state.stapleOff.push(name);
         save(LS.staples, state.stapleOff);
+        markHintSeen();   // 직접 건드렸으면 안내는 할 일을 다 했다
         renderResults();
       });
       label.appendChild(cb);
@@ -423,6 +426,34 @@
   }
 
 
+
+  /* ── 첫 방문 안내 ─────────────────────────────
+   * 기본 양념을 전부 켜 둔 채로 시작하는 게 결과가 풍성해서 낫지만,
+   * 집에 없는 양념이 켜져 있으면 '바로 가능'이 거짓말이 된다.
+   * 그래서 처음 온 사람에게만 한 번 확인을 요청한다. */
+
+  function isFirstVisit() {
+    try {
+      return !localStorage.getItem(LS.seenHint) &&
+             !localStorage.getItem(LS.pantry) &&
+             !localStorage.getItem(LS.staples);
+    } catch (e) { return false; }  // 저장을 못 쓰면 매번 띄우지 않는다
+  }
+
+  function markHintSeen() {
+    try { localStorage.setItem(LS.seenHint, '1'); } catch (e) { /* 무시 */ }
+  }
+
+  function showStaplesHint() {
+    if (!el.staplesHint || !el.staplesGroup) return;
+    el.staplesGroup.open = true;
+    el.staplesHint.hidden = false;
+  }
+
+  function dismissStaplesHint() {
+    if (el.staplesHint) el.staplesHint.hidden = true;
+    markHintSeen();
+  }
 
   /* ── 측정 ─────────────────────────────────────
    * 설정이 비어 있으면 스크립트를 아예 불러오지 않는다.
@@ -870,6 +901,8 @@
     } else if (e.key === 'Escape') { hideSuggest(); }
   });
 
+  if (el.staplesHintOk) el.staplesHintOk.addEventListener('click', dismissStaplesHint);
+
   el.clearBtn.addEventListener('click', function () {
     state.pantry = [];
     save(LS.pantry, state.pantry);
@@ -989,6 +1022,8 @@
     renderStaples();
     renderChips();
     renderResults();
+
+    if (isFirstVisit()) showStaplesHint();
 
     var fromUrl = recipeIdFromUrl();
     if (fromUrl) openRecipeById(fromUrl);
