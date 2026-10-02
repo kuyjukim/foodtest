@@ -27,6 +27,22 @@ global.window = {};
 require('../data/recipes.js');
 const RECIPES = global.window.RECIPES;
 
+/* 측정 태그. 레시피 페이지는 app.js 를 부르지 않으므로 여기서 직접 넣어야 한다.
+ * 검색·공유로 들어오는 사람은 대부분 레시피 페이지에 먼저 닿는다. */
+function analyticsTag() {
+  global.window = global.window || {};
+  try { require('../data/analytics.js'); } catch (e) { return ''; }
+  const id = (global.window.ANALYTICS || {}).ga4Id;
+  if (!id) return '';
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(id)}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${esc(id)}');
+</script>`;
+}
+
 /* 검색엔진 소유확인 태그. site-verify.json 에 값이 있을 때만 넣는다.
  * 크롤러는 자바스크립트를 실행하지 않으므로 HTML 에 직접 박아야 한다. */
 function verifyTags() {
@@ -86,6 +102,7 @@ function page(r) {
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${url}">
 ${verifyTags()}
+${analyticsTag()}
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="오늘 뭐 먹지?">
@@ -197,9 +214,10 @@ const MARK_B = '<!-- site-verification:end -->';
 if (indexHtml.includes(MARK_A)) {
   const before = indexHtml.slice(0, indexHtml.indexOf(MARK_A) + MARK_A.length);
   const after = indexHtml.slice(indexHtml.indexOf(MARK_B));
-  const tags = verifyTags();
+  const tags = [verifyTags(), analyticsTag()].filter(Boolean).join('\n');
   fs.writeFileSync(INDEX, before + (tags ? '\n' + tags + '\n' : '\n') + after);
-  console.log('소유확인 태그:', tags ? tags.replace(/\n/g, ' / ') : '(설정값 없음 — 넣지 않음)');
+  console.log('소유확인:', verifyTags() ? '넣음' : '설정값 없음');
+  console.log('측정 태그:', analyticsTag() ? '넣음 (index + 레시피 125개)' : '설정값 없음');
 }
 
 console.log(`레시피 페이지 ${RECIPES.length}개 생성 → recipe/`);

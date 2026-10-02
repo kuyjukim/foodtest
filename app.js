@@ -441,7 +441,8 @@
       document.head.appendChild(cf);
     }
 
-    if (ANALYTICS.ga4Id) {
+    // 정적 태그(HTML 에 박힌 것)가 이미 올렸으면 다시 넣지 않는다
+    if (ANALYTICS.ga4Id && typeof window.gtag !== 'function') {
       var ga = document.createElement('script');
       ga.async = true;
       ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ANALYTICS.ga4Id);
